@@ -1,0 +1,71 @@
+<div ng-controller='mainController'>
+  <h3>register</h3>
+  <form ng-submit='createUser(newUser)'>
+    <input type="text" name='username' placeholder="username" ng-model='newUser.username'>
+    <input type="password" name='username' placeholder="password" ng-model='newUser.password'>
+    <input type="submit" value="Submit">
+  </form>
+  <h3>login</h3>
+
+  <form ng-submit='loginUser(userData)'>
+    <div ng-if='error.message'><span ng-bind='error.message'></span></div>
+    <input type="text" name='username' placeholder="username" ng-model='userData.username'>
+    <input type="password" name='password' placeholder="password" ng-model='userData.password'>
+    <input type="submit" value="Submit">
+  </form>
+  <a href="/auth/facebook"><button>Log In with Facebook</button></a>
+  <a href="/auth/google"><button>Sign In with Google</button></a>
+</div>
+
+<div ng-controller='postsController'>
+
+	<div class="row">
+		<div class="col-md-6 col-md-offset-3">
+			<h3> agregar pelicula </h3>
+			<form ng-submit="addPost(newPost)" style="margin-top:30px;">
+				<div class="form-group">
+				  <input type="text" class="form-control" placeholder="Title" ng-model="newPost.title"></input>
+				</div>
+				<div class="form-group">
+				  <input type="text" class="form-control" placeholder="Year" ng-model="newPost.year"></input>
+				</div>
+				<div class="form-group">
+				  <input type="text" class="form-control" placeholder="Runtime" ng-model="newPost.runtime"></input>
+				</div>
+				<div class="form-group">
+				  <input type="text" class="form-control" placeholder="Genre" ng-model="newPost.genre"></input>
+				</div>
+				<div class="form-group">
+				  <input type="text" class="form-control" placeholder="Director" ng-model="newPost.director"></input>
+				</div>
+				<div class="form-group">
+				  <input type="text" class="form-control" placeholder="Actors" ng-model="newPost.actors"></input>
+				</div>
+				<div class="form-group">
+				  <input type="text" class="form-control" placeholder="Plot" ng-model="newPost.plot"></input>
+				</div>
+				<div class="form-group">
+				  <input type="text" class="form-control" placeholder="Poster" ng-model="newPost.poster"></input>
+				</div>				
+				  <button type="submit" class="btn btn-primary">Post</button>
+			</form>
+			
+			<button ng-click="precargarCampos()" class="btn btn-warning">precargar campos</button>
+			
+		</div>
+	</div>
+	
+
+	<div class="row">
+		<div class="col-md-10 col-md-offset-1">
+			<h3> peliculas existentes </h3>
+			<div ng-repeat="post in posts | orderBy: 'title'"> <!-- implementar distintos ordenamientos -->
+				{{post.title}} - {{post.year}} - {{post.runtime}} - {{post.director}} - {{post.actors}} - {{post.plot}} - {{post.poster}} - {{post.relatedMovies}} - {{post.comments}}
+				<span>
+					<a href="#/posts/{{$index}}">ver en detalle</a>
+				</span>
+			</div>
+		</div>
+	</div>
+	
+</div>
