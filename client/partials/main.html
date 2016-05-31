@@ -17,7 +17,7 @@
   <a href="/auth/google"><button>Sign In with Google</button></a>
 </div>
 
-<div ng-controller='postsController'>
+<div ng-controller='mainController'>
 
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
@@ -62,7 +62,7 @@
 			<div ng-repeat="post in posts | orderBy: 'title'"> <!-- implementar distintos ordenamientos -->
 				{{post.title}} - {{post.year}} - {{post.runtime}} - {{post.director}} - {{post.actors}} - {{post.plot}} - {{post.poster}} - {{post.relatedMovies}} - {{post.comments}}
 				<span>
-					<a href="#/posts/{{$index}}">ver en detalle</a>
+					<a href="#/posts/{{post._id}}">ver en detalle</a>
 				</span>
 			</div>
 		</div>

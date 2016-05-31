@@ -1,4 +1,4 @@
-myApp.controller('mainController', function($scope, $location, $http, userFactory){
+myApp.controller('mainController', function($scope, $location, $http, userFactory, postFactory){
   $scope.registeredUser = {};
   $scope.error = {};
   userFactory.checkLogin(function(response){
@@ -32,4 +32,16 @@ myApp.controller('mainController', function($scope, $location, $http, userFactor
     })
     $scope.userData = {};
   }
+  
+  //obtengo las peliculas
+  $scope.posts = postFactory.posts;	
+  
+  //para agregar pelicula
+  $scope.addPost = function(input){
+		console.log('entrada addpost', input);
+		postFactory.createMovie(input, function(response){
+			console.log(response);
+		})		
+	}
+  
 });

@@ -1,0 +1,18 @@
+<div>
+
+	<div class="page-header">
+		<h3>
+		<a ng-show="post.link" href="{{post.link}}">
+			{{post.title}}
+		</a>
+		  {{post.title}} - {{post.year}} - {{post.runtime}} - {{post.director}} - {{post.actors}} - {{post.plot}} - {{post.poster}}
+		</h3>	
+	</div>
+
+	  <div ng-repeat="comment in post.comments">
+		by {{comment.author}}
+		<span style="font-size:20px; margin-left:10px;">
+		  {{comment.body}}
+		</span>
+	</div>
+</div>

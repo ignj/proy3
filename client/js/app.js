@@ -13,7 +13,7 @@ function($stateProvider, $urlRouterProvider) {
                 postPromise: ['postFactory', function (postFactory) {
                     return postFactory.getAllMovies();
 				}]
-			}
+			}	  
 	})    
 	.state('logueado', {
 		url: '/dashboard',
@@ -21,10 +21,13 @@ function($stateProvider, $urlRouterProvider) {
 	})
 	.state('posts', {
 		url: '/posts/:id',
-		templateUrl: '/partials/posts.html',	  
-		controller: function ($stateParams) {
-            console.log($stateParams);
-        }	  
+		templateUrl: '/partials/readEditPost.html',	  						
+		resolve: {
+            post: ['$stateParams', 'postFactory', function ($stateParams, postFactory) {
+                return postFactory.get($stateParams.id);
+			}]
+		},
+		controller: 'readEditPostController'
 	})
 
   $urlRouterProvider.otherwise('home');

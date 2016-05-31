@@ -17,6 +17,15 @@ myApp.factory('postFactory', function($http, $window){
             angular.copy(data, o.posts);
         });
   };
+  
+  o.get = function (id) {
+			console.log('en postFactory ', id);
+          return $http.get('/movies/' + id)
+            .then(function (res) {
+				console.log("en postfactory, valor de retorno ", res.data);
+              return res.data;
+          });
+	};
  
   return o;    
 })

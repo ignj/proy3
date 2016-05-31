@@ -34,6 +34,23 @@ module.exports = (function(){
 					res.json(results);
 				}
 			})
+		},
+		getMovieById: function(req, res, next, id){
+			console.log("ID QUERY ", id);						
+			var query = Movie.findById(id);			
+			
+			query.exec(function (err,movie){
+				if (err) {return next(err);}
+				if (!movie) {return next(new Error("Can't find movie"));}
+				
+				req.movie = movie;								
+				return next();
+			});
+		},
+		getLinkedObjectsOfMovie: function(req, res, next) {
+		  //aca cargar los comentarios
+		  console.log("pelicula es ",req.movie);
+		  res.json(req.movie);
 		}
 	}
 })();

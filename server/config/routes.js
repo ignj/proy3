@@ -54,8 +54,12 @@ module.exports = function(app) {
   app.get('/getAllUsers', users.getAllUsers);
   app.post('/addFriend', users.addFriend);
   
+  //definicion de parametros para las query de abajo
+  app.param('movie', movies.getMovieById);
+  
   //rutas de manejo de peliculas
   app.post('/movies', movies.createMovie);
-  app.get('/movies', movies.getAllMovies);
+  app.get('/movies', movies.getAllMovies);    
+  app.get('/movies/:movie', movies.getLinkedObjectsOfMovie);
 
 };
