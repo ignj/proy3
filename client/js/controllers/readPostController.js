@@ -1,4 +1,4 @@
-myApp.controller('readEditPostController',
+myApp.controller('readPostController',
 function(post, $scope){
 	    
 	$scope.post = post;

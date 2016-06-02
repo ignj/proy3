@@ -26,6 +26,14 @@ myApp.factory('postFactory', function($http, $window){
               return res.data;
           });
 	};
+	
+	o.editMovie = function(input, callback){
+		console.log('en postFactory edit', input);		
+		return $http.put('/movies/', input)
+			.success(function(data){
+				console.log(data);
+			});
+	};
  
   return o;    
 })

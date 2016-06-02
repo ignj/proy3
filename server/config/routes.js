@@ -61,5 +61,6 @@ module.exports = function(app) {
   app.post('/movies', movies.createMovie);
   app.get('/movies', movies.getAllMovies);    
   app.get('/movies/:movie', movies.getLinkedObjectsOfMovie);
+  app.put('/movies', movies.editMovie);
 
 };

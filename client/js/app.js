@@ -21,13 +21,23 @@ function($stateProvider, $urlRouterProvider) {
 	})
 	.state('posts', {
 		url: '/posts/:id',
-		templateUrl: '/partials/readEditPost.html',	  						
+		templateUrl: '/partials/readPost.html',	  						
 		resolve: {
             post: ['$stateParams', 'postFactory', function ($stateParams, postFactory) {
                 return postFactory.get($stateParams.id);
 			}]
 		},
-		controller: 'readEditPostController'
+		controller: 'readPostController'
+	})
+	.state('postEdition', {
+		url: '/posts/e/:id',
+		templateUrl: '/partials/editPost.html',	  						
+		resolve: {
+            actualPost: ['$stateParams', 'postFactory', function ($stateParams, postFactory) {
+                return postFactory.get($stateParams.id);
+			}]
+		},
+		controller: 'editPostController'
 	})
 
   $urlRouterProvider.otherwise('home');
