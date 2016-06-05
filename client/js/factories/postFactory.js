@@ -39,7 +39,17 @@ myApp.factory('postFactory', function($http, $window, $location){
 		console.log('en postfactory delete', input._id);
 		$http.delete('/movies/' + input._id)	
 		$location.path('/home');
-		$location.replace();				
+		$location.replace();
+		$window.location.reload();		
+	}
+	
+	o.addRelatedMovie = function(input, id, callback){
+		console.log("en postfactory relatedMovie ", input, id);	
+		//input es la relatedMovie, id es el id de la pelicula "que la contiene"
+		return $http.put('/movies/'+id+'/relatedMovies/', input)
+			.then(function(res){
+				return res.data;
+			});
 	}
  
   return o;    

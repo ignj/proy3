@@ -122,6 +122,8 @@
 							<li><b>Genre:</b> {{post.genre}}</li> 					   					   
 							<li><b>Run Time:</b> {{post.runtime}}</li> 					   					   
 							<li><a href="#/posts/e/{{post._id}}">editar</a></li>
+							related movies:
+							<li ng-repeat="related in post.relatedMovies | orderBy: 'title'"><a href="#/posts/{{related._id}}">{{related.title}}</a></li>
 						</ul>
 					</div>
 				</div>										

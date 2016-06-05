@@ -1,5 +1,5 @@
 myApp.controller('editPostController',
-function(actualPost, postFactory, $scope, $http, $location, $log){
+function(actualPost, postFactory, $scope, $http, $location, $log, $window){
 	    
 	$scope.actualPost = actualPost;	
 	$scope.posts = postFactory.posts;
@@ -67,7 +67,8 @@ function(actualPost, postFactory, $scope, $http, $location, $log){
 	
 	//var self = this;           
 	// list of movies to be displayed
-	$scope.movies        = loadStates();
+	//$scope.movies        = loadStates();
+	$scope.movies = $scope.posts;
 	$scope.querySearch   = querySearch;
 	$scope.selectedItemChange = selectedItemChange;
 	$scope.searchTextChange   = searchTextChange;  
@@ -84,9 +85,15 @@ function(actualPost, postFactory, $scope, $http, $location, $log){
 	}
 	function selectedItemChange(item) {
 		$log.info('Item changed to ' + JSON.stringify(item));
+		input = JSON.stringify(item);
+		id = actualPost._id;
+		postFactory.addRelatedMovie(input, id);
+		
+		//actualizo la pagina
+		$window.location.reload();
 	}
 	//build list of states as map of key-value pairs
-	function loadStates() {
+	/*function loadStates() {
 		var allMovies = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
 		 Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
 		 Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
@@ -100,12 +107,13 @@ function(actualPost, postFactory, $scope, $http, $location, $log){
 				display: movie
 			};
 		});
-	}
+	}*/
 	//filter function for search query
 	function createFilterFor(query) {
-		var lowercaseQuery = angular.lowercase(query);
+		var lowercaseQuery = angular.lowercase(query);		
 		return function filterFn(movie) {
-			return (movie.value.indexOf(lowercaseQuery) === 0);
+			var titulo = movie.title.toLowerCase();
+			return (titulo.indexOf(lowercaseQuery) === 0);
 		};
 	}
 	   

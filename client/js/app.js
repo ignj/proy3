@@ -32,6 +32,16 @@ function($stateProvider, $urlRouterProvider) {
 		},
 		controller: 'editPostController'
 	})
+	.state('posts', {
+		url: '/posts/:id',
+		templateUrl: '/partials/readPost.html',	  						
+		resolve: {
+            post: ['$stateParams', 'postFactory', function ($stateParams, postFactory) {
+                return postFactory.get($stateParams.id);
+			}]
+		},
+		controller: 'readPostController'
+	})
 
   $urlRouterProvider.otherwise('home');
 }]);
