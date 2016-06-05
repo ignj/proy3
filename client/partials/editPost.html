@@ -29,10 +29,34 @@
 				<div class="form-group">
 				  <input type="text" class="form-control" placeholder="Poster" ng-model="actualPost.poster"></input>
 				</div>
-				<div class="form-group">
-					<md-autocomplete md-selected-item="Movie.selectedItem" md-search-text="Movie.searchText" md-items="item in posts" md-item-text="item.title">
+				<div >
+					<!--md-autocomplete md-selected-item="Movie.selectedItem" md-search-text="Movie.searchText" md-items="item in posts" md-item-text="item.title">
 					  <span md-highlight-text="post.searchText">{{item.title}}aca deberia estar</span>
-					</md-autocomplete>
+					</md-autocomplete-->					
+										
+					<md-content class="md-padding">
+						<form ng-submit="$event.preventDefault()">						   
+						   <md-autocomplete							  
+							  md-selected-item="selectedItem"
+							  md-search-text-change="searchTextChange(searchText)"
+							  md-search-text="searchText"
+							  md-selected-item-change="selectedItemChange(item)"
+							  md-items="item in querySearch(searchText)"
+							  md-item-text="item.display"
+							  md-min-length="0"
+							  placeholder="Related movie">
+							  <md-item-template>
+								 <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.display}}</span>
+							  </md-item-template>
+							  <md-not-found>
+								 No states matching "{{searchText}}" were found.								 
+							  </md-not-found>
+						   </md-autocomplete>
+						   <br/>						   
+						</form>
+					 </md-content>					 
+					 
+					 {{states}}
 				</div>
 				  <button type="submit" class="btn btn-warning">Edit</button>
 			</form>

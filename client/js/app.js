@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.router']);
+var myApp = angular.module('myApp', ['ui.router', 'ngMaterial']);
 
 myApp.config([
 '$stateProvider',
@@ -25,6 +25,9 @@ function($stateProvider, $urlRouterProvider) {
 		resolve: {
             actualPost: ['$stateParams', 'postFactory', function ($stateParams, postFactory) {
                 return postFactory.get($stateParams.id);
+			}],
+			postPromise: ['postFactory', function (postFactory) {
+                    return postFactory.getAllMovies();
 			}]
 		},
 		controller: 'editPostController'
