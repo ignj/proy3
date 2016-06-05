@@ -19,16 +19,6 @@ function($stateProvider, $urlRouterProvider) {
 		url: '/dashboard',
 		templateUrl: '/partials/dashboard.html'
 	})
-	.state('posts', {
-		url: '/posts/:id',
-		templateUrl: '/partials/readPost.html',	  						
-		resolve: {
-            post: ['$stateParams', 'postFactory', function ($stateParams, postFactory) {
-                return postFactory.get($stateParams.id);
-			}]
-		},
-		controller: 'readPostController'
-	})
 	.state('postEdition', {
 		url: '/posts/e/:id',
 		templateUrl: '/partials/editPost.html',	  						
