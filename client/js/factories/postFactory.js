@@ -46,9 +46,17 @@ myApp.factory('postFactory', function($http, $window, $location){
 	o.addRelatedMovie = function(input, id, callback){
 		console.log("en postfactory relatedMovie ", input, id);	
 		//input es la relatedMovie, id es el id de la pelicula "que la contiene"
-		return $http.put('/movies/'+id+'/relatedMovies/', input)
+		return $http.post('/movies/'+id+'/relatedMovies/', input)
 			.then(function(res){
 				return res.data;
+			});
+	}
+	
+	o.deleteRelatedMovie = function(input, id, callback){
+		console.log("peli modif ", id," peli elim ",input._id);
+		return $http.delete('/movies/'+id+'/relatedMovies/'+input._id)
+			.success(function(data){
+				return data;
 			});
 	}
  

@@ -63,6 +63,14 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window){
         });
 	}
 	
+	//eliminacion de pelicula relacionada
+	$scope.eliminarPeliculaRelacionada = function(input){		
+		id = actualPost._id;
+		console.log("peli modif ", id," peli elim ",input._id);
+		postFactory.deleteRelatedMovie(input, id);
+		$window.location.reload();
+	}
+	
 	//autocompletado
 	
 	//var self = this;           
@@ -83,6 +91,8 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window){
 	function searchTextChange(text) {
 		$log.info('Text changed to ' + text);
 	}
+	
+	//se añade la pelicula relacionada
 	function selectedItemChange(item) {
 		$log.info('Item changed to ' + JSON.stringify(item));
 		input = JSON.stringify(item);

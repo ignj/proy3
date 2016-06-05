@@ -33,7 +33,14 @@
 				
 					Related Movies:					
 					<ul>						
-						<li ng-repeat="related in actualPost.relatedMovies | orderBy: 'title'"><a href="#/posts/{{related._id}}">{{related.title}}</a></li>
+						<li ng-repeat="related in actualPost.relatedMovies | orderBy: 'title'">
+							<a href="#/posts/{{related._id}}">
+								{{related.title}}
+							</a> 
+							<button ng-click="eliminarPeliculaRelacionada(related)" form="eliminarPeliculaRelacionada" class="btn btn-danger">
+								Delete
+							</button>
+						</li>
 					</ul>
 									
 					<md-content class="md-padding">

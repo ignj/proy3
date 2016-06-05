@@ -139,6 +139,46 @@ module.exports = (function(){
 					
 				 });
 			
+		},
+		deleteRelatedMovie: function(req, res, next){		
+			//console.log("movie ",req.params.movie," req.params.relatedMovie ", req.params.relatedMovie);
+			//recupero aca los parametros porque en routes.js solo
+			//recupera un solo document y es bastante confuso
+			//dejar media consulta aca y media consulta en routes.js
+			var idPeliculaModificar = req.params.movie;
+			var relatedMovieId = req.params.relatedMovie;
+						
+			Movie.findById(idPeliculaModificar)
+				 .populate('relatedMovies')
+				 .exec(function(err,movie){
+					 console.log("related movies es ",movie.relatedMovies); 
+					 if (err) {return next(err);}
+					 var encontrado = false;	
+					 var aSacar = null;
+					 movie.relatedMovies.forEach(function(relMovie){						 
+						if (relMovie._id == relatedMovieId){													
+							encontrado=true; 							
+							aSacar=relMovie;
+						}
+					 });
+					 
+					 if (encontrado){
+						 //si estaba lo saco y guardo los cambios
+						 console.log("en el if"); 						 
+						 movie.relatedMovies.pull(aSacar);
+						 movie.save(function(err, post) {
+							if(err){ return next(err); }
+			
+							res.json(movie);
+						});
+					 }
+					 else{
+						 console.log("en el else");
+						 return next();
+						}
+					
+				 });
+			
 		}
 	}
 })();
