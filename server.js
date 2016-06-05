@@ -24,7 +24,6 @@ require('./server/config/mongoose.js');
 require('./server/config/passport.js');
 
 // authentication
-require("./server/auth/fb_auth.js");
 require("./server/auth/google_auth.js")
 
 //routes

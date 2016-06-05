@@ -1,19 +1,5 @@
 <div ng-controller='mainController'>
-  <h3>register</h3>
-  <form ng-submit='createUser(newUser)'>
-    <input type="text" name='username' placeholder="username" ng-model='newUser.username'>
-    <input type="password" name='username' placeholder="password" ng-model='newUser.password'>
-    <input type="submit" value="Submit">
-  </form>
-  <h3>login</h3>
 
-  <form ng-submit='loginUser(userData)'>
-    <div ng-if='error.message'><span ng-bind='error.message'></span></div>
-    <input type="text" name='username' placeholder="username" ng-model='userData.username'>
-    <input type="password" name='password' placeholder="password" ng-model='userData.password'>
-    <input type="submit" value="Submit">
-  </form>
-  <a href="/auth/facebook"><button>Log In with Facebook</button></a>
   <a href="/auth/google"><button>Sign In with Google</button></a>
 </div>
 
