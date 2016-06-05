@@ -52,6 +52,22 @@ module.exports = (function(){
 			});			
 			
 		},
+		deleteMovie: function(req, res, next){			
+			console.log("pelicula a eliminar", req.movie);
+			Movie.findById(req.movie._id, function(err,movie){
+				if(!movie)
+					return next(new Error('Could not load Document'));
+				else{
+					movie.remove(function (err) {
+						if (err) {return next(err)}
+						else
+							// if no error, your model is removed
+							return next();
+					});
+				}
+				
+			});
+		},
 		getAllMovies: function(req, res, next){
 			Movie.find(function(err,results){
 				if (err){
@@ -78,6 +94,6 @@ module.exports = (function(){
 		  //aca cargar los comentarios
 		  console.log("pelicula es ",req.movie);
 		  res.json(req.movie);
-		}
+		}		
 	}
 })();

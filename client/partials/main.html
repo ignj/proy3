@@ -103,7 +103,8 @@
 <label>Search in movies: <input ng-model="searchText"></label>
 			
 			<div class="row" ng-repeat="post in posts | filter:searchText" style="width: 60%; margin: 0 auto; ">
-				
+				<br>		
+				<br>
 				<div class="cover" style="float: left;">
 					<img ng-src="{{post.poster}}">
 					
@@ -119,9 +120,10 @@
 							<li><b>Actors:</b> {{post.actors}}</li> 					  
 							<li><b>Plot:</b> {{post.plot}}</li> 					  
 							<li><b>Genre:</b> {{post.genre}}</li> 					   					   
-							<li><b>Run Time:</b> 94</li> 					   					   
+							<li><b>Run Time:</b> {{post.runtime}}</li> 					   					   
+							<li><a href="#/posts/e/{{post._id}}">editar</a></li>
 						</ul>
 					</div>
-				</div>													
-			</div>		 											
+				</div>										
+			</div>		 														
 </div>

@@ -33,11 +33,11 @@
 					<md-autocomplete md-selected-item="Movie.selectedItem" md-search-text="Movie.searchText" md-items="item in posts" md-item-text="item.title">
 					  <span md-highlight-text="post.searchText">{{item.title}}aca deberia estar</span>
 					</md-autocomplete>
-			</div>
+				</div>
 				  <button type="submit" class="btn btn-warning">Edit</button>
 			</form>
 			</md-content>
-			<button type="submit" class="btn btn-danger">Delete</button>
+			<button ng-click="eliminarPelicula(actualPost)" class="btn btn-danger">Delete</button>
 
 			<button ng-click="precargarCampos(actualPost.title)" class="btn btn-success">precargar campos</button>
 			<label id="precargarCamposError">{{precargarCamposError}}</label>

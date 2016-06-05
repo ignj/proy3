@@ -1,4 +1,4 @@
-myApp.factory('postFactory', function($http, $window){
+myApp.factory('postFactory', function($http, $window, $location){
   var o = {
     posts: []
   };
@@ -34,6 +34,13 @@ myApp.factory('postFactory', function($http, $window){
 				console.log(data);
 			});
 	};
+	
+	o.deleteMovie = function(input){
+		console.log('en postfactory delete', input._id);
+		$http.delete('/movies/' + input._id)	
+		$location.path('/home');
+		$location.replace();				
+	}
  
   return o;    
 })

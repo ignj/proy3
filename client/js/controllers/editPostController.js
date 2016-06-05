@@ -1,5 +1,5 @@
 myApp.controller('editPostController',
-function(actualPost, postFactory, $scope, $http){
+function(actualPost, postFactory, $scope, $http, $location){
 	    
 	$scope.actualPost = actualPost;		
 	$scope.precargarCamposError = ""; //ningun error
@@ -10,6 +10,14 @@ function(actualPost, postFactory, $scope, $http){
 		postFactory.editMovie(input, function(response){
 			console.log(response);
 		})		
+	}
+	
+	//para eliminar la pelicula
+	$scope.eliminarPelicula = function(input){
+		console.log('entrada eliminar ', input);
+		postFactory.deleteMovie(input, function(response){
+			console.log("se elimino");
+		})
 	}
 	
 	//para cargar pelicula del servicio

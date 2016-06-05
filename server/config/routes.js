@@ -25,5 +25,6 @@ module.exports = function(app) {
   app.get('/movies', movies.getAllMovies);    
   app.get('/movies/:movie', movies.getLinkedObjectsOfMovie);
   app.put('/movies', movies.editMovie);
+  app.delete('/movies/:movie', movies.deleteMovie);
 
 };
