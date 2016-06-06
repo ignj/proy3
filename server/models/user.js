@@ -10,7 +10,8 @@ var UserSchema = mongoose.Schema({
   provider: String,
   pictureURL: String,
   json_info: Object,
-  created_at: {type: Date, default: Date.now}
+  created_at: {type: Date, default: Date.now},
+  type: String
 })
 
 // checking if password is valid

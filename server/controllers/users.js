@@ -7,8 +7,6 @@ module.exports = (function(){
   return{
     createUser: function(req, res){
       req.body.password = bcrypt.hashSync(req.body.password, salt);
-      console.log('in users controller');
-      console.log(req.body);
       var user = new User({username: req.body.username, password: req.body.password});
       user.save(function(err){
         if(err){
@@ -27,15 +25,28 @@ module.exports = (function(){
         }
       })
     },
+
+    setAdmin: function(req, res){
+      console.log("----en setAdmin:", req);
+      User.findById(req.body._id, function(err, user){
+        user.type = "admin";
+        user.save(function(err){
+          if(err){
+            res.json({err: err});
+          } else {
+            res.json(true);
+          }
+        })
+      })
+    },
+
     addFriend: function(req, res){
       User.findOne({_id: req.user.id}, function(err, user){
         user.friend.push(req.body);
         user.save(function(err){
           res.json(err);
         })
-      console.log(req.user, 'current user in add Friend model');
-      console.log(req.body, 'req in user model');
       })
-    } 
+    }
   }
 })();

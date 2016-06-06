@@ -1,4 +1,4 @@
-myApp.factory('userFactory', function($http, $window){
+myApp.factory('userFactory', function($http, $window, $rootScope){
   var user = {};
   var error = {};
   return{
@@ -36,14 +36,22 @@ myApp.factory('userFactory', function($http, $window){
     },
     checkLogin: function(callback){
       $http.get('/loggedin').then(function(response){
-        console.log(response);
         if(response.data){
-          console.log('there is a user');
           user = response.data;
           callback(response);
         } else {
-          console.log('no user!');
           callback(response);
+        }
+      })
+    },
+
+    getUserLogin: function(callback){
+      $http.get('/loggedin').then(function(response){
+        if(response.data){
+          user = response.data;
+          console.log("El susuario es: ", user);
+          callback(user);
+        } else {
         }
       })
     },
@@ -60,6 +68,12 @@ myApp.factory('userFactory', function($http, $window){
       console.log('factory trying to add friend to the user', friend);
       $http.post('/addFriend', friend).then(function(response){
         // console.log(response);
+      })
+    },
+    setAdminUser: function(input, callback){
+      console.log('factory trying to set admin', input);
+      $http.post('/setAdmin', input).then(function(response){
+        console.log(response);
       })
     }
   }

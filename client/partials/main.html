@@ -1,9 +1,16 @@
-<div ng-controller='mainController'>
-
-  <a href="/auth/google"><button>Sign In with Google</button></a>
-</div>
 
 <div ng-controller='mainController'>
+
+  <div ng-show="loginChecked && nombre" class="user-info">
+    <p>persona: {{nombre}} es admin: {{admin}}</p>
+  </div>
+
+  <div ng-show="!loginChecked && !nombre" class="user-info">
+    <p>
+      Please log in
+    </p>
+    <a class="btn btn-primary" href="/auth/google">Sign In with Google</a>
+  </div>
 
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3">
@@ -44,8 +51,8 @@
 
 		</div>
 	</div>
-	
-	
+
+
 <!--
 	<div class="row">
 		<div class="col-md-10 col-md-offset-1">
@@ -99,15 +106,15 @@
 
  </table>
  -->
- 
+
 <label>Search in movies: <input ng-model="searchText"></label>
-			
+
 			<div class="row" ng-repeat="post in posts | filter:searchText" style="width: 60%; margin: 0 auto; ">
-				<br>		
+				<br>
 				<br>
 				<div class="cover" style="float: left;">
 					<img ng-src="{{post.poster}}">
-					
+
 				</div>
 				<div class="mdesc" style="float: right;">
 					<div class="name">
@@ -115,15 +122,15 @@
 					</div>
 					<div class="inattr" style="max-width: 500px;">
 						<ul>
-							<li><b>Year:</b> {{post.year}}</li> 					 	 
-							<li><b>Director:</b> {{post.director}}</li> 					  
-							<li><b>Actors:</b> {{post.actors}}</li> 					  
-							<li><b>Plot:</b> {{post.plot}}</li> 					  
-							<li><b>Genre:</b> {{post.genre}}</li> 					   					   
-							<li><b>Run Time:</b> {{post.runtime}}</li> 					   					   
+							<li><b>Year:</b> {{post.year}}</li>
+							<li><b>Director:</b> {{post.director}}</li>
+							<li><b>Actors:</b> {{post.actors}}</li>
+							<li><b>Plot:</b> {{post.plot}}</li>
+							<li><b>Genre:</b> {{post.genre}}</li>
+							<li><b>Run Time:</b> {{post.runtime}}</li>
 							<li><a href="#/posts/e/{{post._id}}">editar</a></li>
 						</ul>
 					</div>
-				</div>										
-			</div>		 														
+				</div>
+			</div>
 </div>
