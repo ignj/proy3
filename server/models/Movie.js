@@ -9,6 +9,8 @@ var MovieSchema = new mongoose.Schema({
   actors: String,
   plot: String,
   poster: String,
+  votes: Number,
+  rating: Number,
   //keywords: [String],
   relatedMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }],
   comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]

@@ -31,6 +31,7 @@ module.exports = function(app) {
   app.get('/movies', movies.getAllMovies);
   app.get('/movies/:movie', movies.getLinkedObjectsOfMovie);
   app.put('/movies', movies.editMovie);
+  app.put('/setrating', movies.setRating);
   app.delete('/movies/:movie', movies.deleteMovie);
 
   //rutas de manejo de peliculas relacionadas

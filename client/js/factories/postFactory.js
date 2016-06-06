@@ -10,14 +10,14 @@ myApp.factory('postFactory', function($http, $window, $location){
 				o.posts.push(data);
 		  });
   };
-  
+
   o.getAllMovies = function(){
 		return $http.get('/movies')
             .success(function (data) {
             angular.copy(data, o.posts);
         });
   };
-  
+
   o.get = function (id) {
 			console.log('en postFactory ', id);
           return $http.get('/movies/' + id)
@@ -26,32 +26,40 @@ myApp.factory('postFactory', function($http, $window, $location){
               return res.data;
           });
 	};
-	
+
 	o.editMovie = function(input, callback){
-		console.log('en postFactory edit', input);		
+		console.log('en postFactory edit', input);
 		return $http.put('/movies/', input)
 			.success(function(data){
 				console.log(data);
 			});
 	};
-	
+
+  o.setRating = function(input, callback){
+    console.log("en la factory", input);
+    return $http.put('/setrating/', input)
+			.success(function(data){
+				console.log(data);
+			});
+  }
+
 	o.deleteMovie = function(input){
 		console.log('en postfactory delete', input._id);
-		$http.delete('/movies/' + input._id)	
+		$http.delete('/movies/' + input._id)
 		$location.path('/home');
 		$location.replace();
-		$window.location.reload();		
+		$window.location.reload();
 	}
-	
+
 	o.addRelatedMovie = function(input, id, callback){
-		console.log("en postfactory relatedMovie ", input, id);	
+		console.log("en postfactory relatedMovie ", input, id);
 		//input es la relatedMovie, id es el id de la pelicula "que la contiene"
 		return $http.post('/movies/'+id+'/relatedMovies/', input)
 			.then(function(res){
 				return res.data;
 			});
 	}
-	
+
 	o.deleteRelatedMovie = function(input, id, callback){
 		console.log("peli modif ", id," peli elim ",input._id);
 		return $http.delete('/movies/'+id+'/relatedMovies/'+input._id)
@@ -59,6 +67,6 @@ myApp.factory('postFactory', function($http, $window, $location){
 				return data;
 			});
 	}
- 
-  return o;    
+
+  return o;
 })

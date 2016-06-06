@@ -29,6 +29,9 @@
 				<div class="form-group">
 				  <input type="text" class="form-control" placeholder="Poster" ng-model="actualPost.poster"></input>
 				</div>
+				<div class="form-group">
+				  <input type="number" class="form-control" placeholder="value" ng-model="actualPost.rating"></input>
+				</div>
 				<div>
 
 					Related Movies:
@@ -68,6 +71,7 @@
 				</div>
 
 				  <button type="submit" form="formEdicion" class="btn btn-warning">Edit</button>
+					<a class="btn btn-primary" ng-click="votar(actualPost)">votar</a>
 			</form>
 			</md-content>
 			<button ng-click="eliminarPelicula(actualPost)" class="btn btn-danger">Delete</button>
