@@ -25,8 +25,12 @@ module.exports = function(app) {
 
   //definicion de parametros para las query de abajo
   app.param('movie', movies.getMovieById);
+<<<<<<< HEAD
+
+=======
   app.param('relatedMovie', movies.getMovieById);
   
+>>>>>>> 7adbfa1a4d3a4bc214bf69a630df5cffae09c95b
   //rutas de manejo de peliculas
   app.post('/movies', movies.createMovie);
   app.get('/movies', movies.getAllMovies);

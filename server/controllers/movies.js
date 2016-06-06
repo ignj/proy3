@@ -69,18 +69,31 @@ module.exports = (function(){
 			});
 		},
 		getAllMovies: function(req, res, next){
-			Movie.find(function(err,results){
-				if (err){
-					next(err);
-				}
-				else{
-					res.json(results);
-				}
-			})
+			Movie.find()
+				 .populate('relatedMovies')
+				 .exec(function(err,results){
+					if (err){
+						next(err);
+					}
+					else{
+						res.json(results);
+					}
+				})
 		},		
 		getMovieById: function(req, res, next, id){
 			console.log("ID QUERY ", id);						
-			var query = Movie.findById(id);			
+			
+			Movie.findById(id)
+				 .populate('relatedMovies')
+				 .exec(function(err,movie){
+					if (err) {return next(err);}
+					if (!movie) {return next(new Error("Can't find movie"));}
+				
+					req.movie = movie;								
+					return next();
+				 });
+			
+			/*var query = Movie.findById(id);			
 			
 			query.exec(function (err,movie){
 				if (err) {return next(err);}
@@ -88,12 +101,84 @@ module.exports = (function(){
 				
 				req.movie = movie;								
 				return next();
-			});
+			});*/
 		},
 		getLinkedObjectsOfMovie: function(req, res, next) {
 		  //aca cargar los comentarios
 		  console.log("pelicula es ",req.movie);
 		  res.json(req.movie);
-		}		
+		},
+		addRelatedMovie: function(req, res, next){			
+			console.log("pelicula a modificar", req.movie);
+			console.log("cuerpo mensaje ",req.body);
+			
+			Movie.findById(req.movie._id)
+				 .populate('relatedMovies')
+				 .exec(function(err,movie){
+					 console.log("related movies es ",movie.relatedMovies); 
+					 if (err) {return next(err);}
+					 var existe = false;
+					 movie.relatedMovies.forEach(function(relMovie){
+						 console.log("relMovie._id ",relMovie._id," req.body ",req.body._id);
+						if (relMovie._id == req.body._id) existe=true; 
+					 });
+					 
+					 if (!existe){
+						 console.log("en el if"); 
+						 movie.relatedMovies.push(req.body);
+						 movie.save(function(err, post) {
+							if(err){ return next(err); }
+			
+							res.json(movie);
+						});
+					 }
+					 else{
+						 console.log("en el else");
+						 return next();
+						}
+					
+				 });
+			
+		},
+		deleteRelatedMovie: function(req, res, next){		
+			//console.log("movie ",req.params.movie," req.params.relatedMovie ", req.params.relatedMovie);
+			//recupero aca los parametros porque en routes.js solo
+			//recupera un solo document y es bastante confuso
+			//dejar media consulta aca y media consulta en routes.js
+			var idPeliculaModificar = req.params.movie;
+			var relatedMovieId = req.params.relatedMovie;
+						
+			Movie.findById(idPeliculaModificar)
+				 .populate('relatedMovies')
+				 .exec(function(err,movie){
+					 console.log("related movies es ",movie.relatedMovies); 
+					 if (err) {return next(err);}
+					 var encontrado = false;	
+					 var aSacar = null;
+					 movie.relatedMovies.forEach(function(relMovie){						 
+						if (relMovie._id == relatedMovieId){													
+							encontrado=true; 							
+							aSacar=relMovie;
+						}
+					 });
+					 
+					 if (encontrado){
+						 //si estaba lo saco y guardo los cambios
+						 console.log("en el if"); 						 
+						 movie.relatedMovies.pull(aSacar);
+						 movie.save(function(err, post) {
+							if(err){ return next(err); }
+			
+							res.json(movie);
+						});
+					 }
+					 else{
+						 console.log("en el else");
+						 return next();
+						}
+					
+				 });
+			
+		}
 	}
 })();

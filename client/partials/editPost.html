@@ -4,7 +4,7 @@
 		<div class="col-md-6 col-md-offset-3">
 			<h3> editar pelicula </h3>
 			<md-content class="md-padding">
-			<form ng-submit="editPost(actualPost)" style="margin-top:30px;">
+			<form ng-submit="editPost(actualPost)" id="formEdicion" style="margin-top:30px;">
 				<div class="form-group">
 				  <input type="text" class="form-control" placeholder="Title" ng-model="actualPost.title"></input>
 				</div>
@@ -29,11 +29,20 @@
 				<div class="form-group">
 				  <input type="text" class="form-control" placeholder="Poster" ng-model="actualPost.poster"></input>
 				</div>
-				<div >
-					<!--md-autocomplete md-selected-item="Movie.selectedItem" md-search-text="Movie.searchText" md-items="item in posts" md-item-text="item.title">
-					  <span md-highlight-text="post.searchText">{{item.title}}aca deberia estar</span>
-					</md-autocomplete-->					
-										
+				<div>
+				
+					Related Movies:					
+					<ul>						
+						<li ng-repeat="related in actualPost.relatedMovies | orderBy: 'title'">
+							<a href="#/posts/{{related._id}}">
+								{{related.title}}
+							</a> 
+							<button ng-click="eliminarPeliculaRelacionada(related)" form="eliminarPeliculaRelacionada" class="btn btn-danger">
+								Delete
+							</button>
+						</li>
+					</ul>
+									
 					<md-content class="md-padding">
 						<form ng-submit="$event.preventDefault()">						   
 						   <md-autocomplete							  
@@ -42,23 +51,23 @@
 							  md-search-text="searchText"
 							  md-selected-item-change="selectedItemChange(item)"
 							  md-items="item in querySearch(searchText)"
-							  md-item-text="item.display"
+							  md-item-text="item.title"
 							  md-min-length="0"
 							  placeholder="Related movie">
 							  <md-item-template>
-								 <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.display}}</span>
+								 <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.title}}</span>
 							  </md-item-template>
 							  <md-not-found>
-								 No states matching "{{searchText}}" were found.								 
+								 No movies matching "{{searchText}}" were found. Try to save it first in main page.								 
 							  </md-not-found>
 						   </md-autocomplete>
 						   <br/>						   
 						</form>
-					 </md-content>					 
-					 
-					 {{states}}
+					</md-content>					 
+					 					 
 				</div>
-				  <button type="submit" class="btn btn-warning">Edit</button>
+				
+				  <button type="submit" form="formEdicion" class="btn btn-warning">Edit</button>
 			</form>
 			</md-content>
 			<button ng-click="eliminarPelicula(actualPost)" class="btn btn-danger">Delete</button>

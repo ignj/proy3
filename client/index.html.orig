@@ -15,12 +15,16 @@
 	<!-- FIN DE NECESARIO PARA AUTOCOMPLETAR -->
 
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
-	
+
     <script src='/js/app.js'></script>
-	
+
     <script src="/js/controllers/mainController.js"></script>
+<<<<<<< HEAD
+    <script src="/js/controllers/dashboardController.js"></script>
+=======
 	<script src="/js/controllers/readPostController.js"></script>
     <script src="/js/controllers/dashboardController.js"></script>	
+>>>>>>> 7adbfa1a4d3a4bc214bf69a630df5cffae09c95b
 	<script src="/js/controllers/editPostController.js"></script>
     <script src="/js/factories/userFactory.js"></script>
 	<script src="/js/factories/postFactory.js"></script>
