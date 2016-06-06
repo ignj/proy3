@@ -1,18 +1,18 @@
 
 <div ng-controller='mainController'>
 
-  <div ng-show="loginChecked && nombre" class="user-info">
-    <p>persona: {{nombre}} es admin: {{admin}}</p>
+  <div ng-show="loginChecked && user" class="user-info">
+    <p>persona: {{user.name}} es del tipo: {{user.type}}</p>
   </div>
 
-  <div ng-show="!loginChecked && !nombre" class="user-info">
+  <div ng-show="!loginChecked && !user" class="user-info">
     <p>
       Please log in
     </p>
     <a class="btn btn-primary" href="/auth/google">Sign In with Google</a>
   </div>
 
-	<div class="row">
+	<div ng-show="isAdmin" class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<h3> agregar pelicula </h3>
 			<form ng-submit="addPost(newPost)" style="margin-top:30px;">
@@ -128,7 +128,7 @@
 							<li><b>Plot:</b> {{post.plot}}</li>
 							<li><b>Genre:</b> {{post.genre}}</li>
 							<li><b>Run Time:</b> {{post.runtime}}</li>
-							<li><a href="#/posts/e/{{post._id}}">editar</a></li>
+							<li ng-show="isAdmin"><a href="#/posts/e/{{post._id}}">editar</a></li>
 							related movies:
 							<li ng-repeat="related in post.relatedMovies | orderBy: 'title'"><a href="#/posts/{{related._id}}">{{related.title}}</a></li>
 						</ul>

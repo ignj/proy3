@@ -2,16 +2,15 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
   $scope.registeredUser = {};
   $scope.error = {};
   $scope.loginChecked = false;
-  $scope.admin = false;
-  $scope.nombre = false;
   $scope.user = false;
+  $scope.isAdmin = false;
   userFactory.getUserLogin(function(user){
     $scope.user = user;
-    $scope.nombre = $scope.user.name;
     $scope.loginChecked = true;
     console.log("en vista el user es:");
     console.log($scope.user.type);
-    $scope.admin = $scope.user.type;
+    if ($scope.user.type == "admin")
+      $scope.isAdmin = true;
   });
 
 

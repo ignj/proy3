@@ -26,7 +26,7 @@ passport.use(new GoogleStrategy({
 					provider: profile.provider,
 					json_info: profile._json
 				});
-				user.type = "admin";
+				//user.type = "admin";
 				user.save(function(err) {
 					if(err) {
 						console.log(err)

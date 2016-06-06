@@ -1,6 +1,6 @@
 <div>
 
-	<div class="row">
+	<div ng-show="isAdmin" class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<h3> editar pelicula </h3>
 			<md-content class="md-padding">
@@ -30,22 +30,22 @@
 				  <input type="text" class="form-control" placeholder="Poster" ng-model="actualPost.poster"></input>
 				</div>
 				<div>
-				
-					Related Movies:					
-					<ul>						
+
+					Related Movies:
+					<ul>
 						<li ng-repeat="related in actualPost.relatedMovies | orderBy: 'title'">
 							<a href="#/posts/{{related._id}}">
 								{{related.title}}
-							</a> 
+							</a>
 							<button ng-click="eliminarPeliculaRelacionada(related)" form="eliminarPeliculaRelacionada" class="btn btn-danger">
 								Delete
 							</button>
 						</li>
 					</ul>
-									
+
 					<md-content class="md-padding">
-						<form ng-submit="$event.preventDefault()">						   
-						   <md-autocomplete							  
+						<form ng-submit="$event.preventDefault()">
+						   <md-autocomplete
 							  md-selected-item="selectedItem"
 							  md-search-text-change="searchTextChange(searchText)"
 							  md-search-text="searchText"
@@ -58,15 +58,15 @@
 								 <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.title}}</span>
 							  </md-item-template>
 							  <md-not-found>
-								 No movies matching "{{searchText}}" were found. Try to save it first in main page.								 
+								 No movies matching "{{searchText}}" were found. Try to save it first in main page.
 							  </md-not-found>
 						   </md-autocomplete>
-						   <br/>						   
+						   <br/>
 						</form>
-					</md-content>					 
-					 					 
+					</md-content>
+
 				</div>
-				
+
 				  <button type="submit" form="formEdicion" class="btn btn-warning">Edit</button>
 			</form>
 			</md-content>

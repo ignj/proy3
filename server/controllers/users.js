@@ -26,20 +26,6 @@ module.exports = (function(){
       })
     },
 
-    setAdmin: function(req, res){
-      console.log("----en setAdmin:", req);
-      User.findById(req.body._id, function(err, user){
-        user.type = "admin";
-        user.save(function(err){
-          if(err){
-            res.json({err: err});
-          } else {
-            res.json(true);
-          }
-        })
-      })
-    },
-
     addFriend: function(req, res){
       User.findOne({_id: req.user.id}, function(err, user){
         user.friend.push(req.body);
