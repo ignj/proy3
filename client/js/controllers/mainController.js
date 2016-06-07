@@ -4,11 +4,10 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
   $scope.loginChecked = false;
   $scope.user = false;
   $scope.isAdmin = false;
+  
   userFactory.getUserLogin(function(user){
     $scope.user = user;
     $scope.loginChecked = true;
-    console.log("en vista el user es:");
-    console.log($scope.user.type);
     if ($scope.user.type == "admin")
       $scope.isAdmin = true;
   });
@@ -96,7 +95,11 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
 		)
 		.error(function (data, status) {
             $scope.precargarCamposError = 'Request failed';
-        });
+      });
 	}
+
+  $('.collapsible').collapsible({
+    accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+  });
 
 });

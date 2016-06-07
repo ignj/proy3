@@ -1,36 +1,47 @@
-<div>
-
+<div class="container">
 	<div ng-show="isAdmin" class="row">
 		<div class="col-md-6 col-md-offset-3">
 			<h3> editar pelicula </h3>
 			<md-content class="md-padding">
-			<form ng-submit="editPost(actualPost)" id="formEdicion" style="margin-top:30px;">
-				<div class="form-group">
-				  <input type="text" class="form-control" placeholder="Title" ng-model="actualPost.title"></input>
-				</div>
-				<div class="form-group">
-				  <input type="text" class="form-control" placeholder="Year" ng-model="actualPost.year"></input>
-				</div>
-				<div class="form-group">
-				  <input type="text" class="form-control" placeholder="Runtime" ng-model="actualPost.runtime"></input>
-				</div>
-				<div class="form-group">
-				  <input type="text" class="form-control" placeholder="Genre" ng-model="actualPost.genre"></input>
-				</div>
-				<div class="form-group">
-				  <input type="text" class="form-control" placeholder="Director" ng-model="actualPost.director"></input>
-				</div>
-				<div class="form-group">
-				  <input type="text" class="form-control" placeholder="Actors" ng-model="actualPost.actors"></input>
-				</div>
-				<div class="form-group">
-				  <input type="text" class="form-control" placeholder="Plot" ng-model="actualPost.plot"></input>
-				</div>
-				<div class="form-group">
-				  <input type="text" class="form-control" placeholder="Poster" ng-model="actualPost.poster"></input>
-				</div>
-				<div class="form-group">
-				  <input type="number" class="form-control" placeholder="value" ng-model="actualPost.rating"></input>
+			<form ng-submit="editPost(actualPost)" class="col s12">
+				<div class="row">
+					<div class="input-field col s6">
+						<input type="text" class="validate" placeholder="Title" ng-model="newPost.title"></input>
+						<label>Title</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="text" class="validate" placeholder="Year" ng-model="newPost.year"></input>
+						<label>Year</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="text" class="validate" placeholder="Runtime" ng-model="newPost.runtime"></input>
+						<label>Runtime</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="text" class="validate" placeholder="Genre" ng-model="newPost.genre"></input>
+						<label>Genre</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="text" class="validate" placeholder="Director" ng-model="newPost.director"></input>
+						<label>Director</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="text" class="validate" placeholder="Actors" ng-model="newPost.actors"></input>
+						<label>Actors</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="text" class="validate" placeholder="Plot" ng-model="newPost.plot"></input>
+						<label>Plot</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="text" class="validate" placeholder="Poster" ng-model="newPost.poster"></input>
+						<label>Poster</label>
+					</div>
+					<div class="input-field col s6">
+						<input type="text" class="validate" placeholder="RelatedMovies" ng-model="newPost.relatedMovie"></input>
+						<label>Rrelated movies</label>
+					</div>
+						<button type="submit" class="waves-effect waves-light btn blue">Post</button>
 				</div>
 				<div>
 
@@ -40,7 +51,7 @@
 							<a href="#/posts/{{related._id}}">
 								{{related.title}}
 							</a>
-							<button ng-click="eliminarPeliculaRelacionada(related)" form="eliminarPeliculaRelacionada" class="btn btn-danger">
+							<button ng-click="eliminarPeliculaRelacionada(related)" form="eliminarPeliculaRelacionada" class="btn btn-danger blue">
 								Delete
 							</button>
 						</li>
@@ -70,13 +81,13 @@
 
 				</div>
 
-				  <button type="submit" form="formEdicion" class="btn btn-warning">Edit</button>
-					<a class="btn btn-primary" ng-click="votar(actualPost)">votar</a>
+				  <button type="submit" form="formEdicion" class="btn btn-warning blue">Edit</button>
+					<a class="btn btn-primary blue" ng-click="votar(actualPost)">votar</a>
 			</form>
 			</md-content>
-			<button ng-click="eliminarPelicula(actualPost)" class="btn btn-danger">Delete</button>
+			<button ng-click="eliminarPelicula(actualPost)" class="btn btn-danger blue">Delete</button>
 
-			<button ng-click="precargarCampos(actualPost.title)" class="btn btn-success">precargar campos</button>
+			<button ng-click="precargarCampos(actualPost.title)" class="btn btn-success blue">precargar campos</button>
 			<label id="precargarCamposError">{{precargarCamposError}}</label>
 
 		</div>
