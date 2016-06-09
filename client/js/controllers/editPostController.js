@@ -28,8 +28,11 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 	//para eliminar la pelicula
 	$scope.eliminarPelicula = function(input){
 		console.log('entrada eliminar ', input);
-		postFactory.deleteMovie(input, function(response){
-			console.log("se elimino");
+		postFactory.deleteMovie(input, function(){
+			console.log("SE ELIMINO-------------");
+			$scope.posts = postFactory.posts;
+			$location.path('/home');
+			$location.replace();					
 		})
 	}
 
@@ -85,15 +88,15 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 	$scope.eliminarPeliculaRelacionada = function(input){
 		id = actualPost._id;
 		console.log("peli modif ", id," peli elim ",input._id);
-		postFactory.deleteRelatedMovie(input, id);
-		$window.location.reload();
+		postFactory.deleteRelatedMovie(input, id, function(data){			
+			$scope.posts = postFactory.posts;
+			$scope.actualPost = data;
+		});
+		
 	}
 
-	//autocompletado
-
-	//var self = this;
+	//AUTOCOMPLETADO
 	// list of movies to be displayed
-	//$scope.movies        = loadStates();
 	$scope.movies = $scope.posts;
 	$scope.querySearch   = querySearch;
 	$scope.selectedItemChange = selectedItemChange;
@@ -114,28 +117,17 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 	function selectedItemChange(item) {
 		$log.info('Item changed to ' + JSON.stringify(item));
 		input = JSON.stringify(item);
-		id = actualPost._id;
-		postFactory.addRelatedMovie(input, id);
-
-		//actualizo la pagina
-		$window.location.reload();
+		if (item != null){
+			id = actualPost._id;
+			postFactory.addRelatedMovie(input, id, function(data){
+				console.log("se agrego la relacionada", data);
+				$scope.posts = postFactory.posts;
+				console.log("data es ",data);
+				$scope.actualPost = data;
+			});
+		}		
 	}
-	//build list of states as map of key-value pairs
-	/*function loadStates() {
-		var allMovies = 'Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware,\
-		 Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana,\
-		 Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana,\
-		 Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina,\
-		 North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina,\
-		 South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia,\
-		 Wisconsin, Wyoming';
-		return allMovies.split(/, +/g).map( function (movie) {
-			return {
-				value: movie.toLowerCase(),
-				display: movie
-			};
-		});
-	}*/
+	
 	//filter function for search query
 	function createFilterFor(query) {
 		var lowercaseQuery = angular.lowercase(query);
@@ -143,9 +135,7 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 			var titulo = movie.title.toLowerCase();
 			return (titulo.indexOf(lowercaseQuery) === 0);
 		};
-	}
-
-	   //console.log(self.states);
+	}	
 
 });
 

@@ -48,8 +48,8 @@
           			  <button type="submit" class="waves-effect waves-light btn blue">Post</button>
                   <a ng-click="precargarCampos(newPost.title)" class="waves-effect waves-light btn blue">precargar campos</a>
               </div>
-        		</form>
-        		<label id="precargarCamposError">{{precargarCamposError}}</label>
+			  <label id="precargarCamposError">{{precargarCamposError}}</label>
+        		</form>        		
           </div>
         </div>
     	</div>
@@ -58,8 +58,9 @@
   </ul>
     <label>Search in movies: <input ng-model="searchText"></label>
     <div class="row" ng-repeat="post in posts | filter:searchText">
+		<!--BORRAR-->TITULO {{post.title}}<!--BORRAR-->
       <div class="col s6"><img ng-src="{{post.poster}}" onerror="imgError(this);"></div>
-      <div class="col s6"><span class="flow-text">
+      <div class="col s6"><span class="flow-text">		
         <div class="inattr" style="max-width: 500px;">
 					<ul>
 						<li><b>Year:</b> {{post.year}}</li>

@@ -53,8 +53,19 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
   $scope.addPost = function(input){
 		console.log('entrada addpost', input);
 		postFactory.createMovie(input, function(response){
-			console.log(response);
-		})
+			console.log(response);			
+			//restauro los campos
+			$scope.newPost.title = "";
+			$scope.newPost.year = "";
+			$scope.newPost.runtime = "";
+			$scope.newPost.genre = "";
+			$scope.newPost.director = "";
+			$scope.newPost.actors = "";
+			$scope.newPost.plot = "";
+			$scope.newPost.poster = "";	
+			
+		});
+						
 	}
 
 	//para cargar pelicula del servicio
@@ -69,6 +80,10 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
 			if (typeof data.Error != 'undefined'){
 				//hubo un error (no de red)
 				$scope.precargarCamposError = data.Error;
+			}
+			else{
+				//limpio un posible error
+				$scope.precargarCamposError ="";
 			}
 
 			var title = data.Title,
@@ -89,7 +104,7 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
 			$scope.newPost.director = director;
 			$scope.newPost.actors = actors;
 			$scope.newPost.plot = plot;
-			$scope.newPost.poster = poster;
+			$scope.newPost.poster = poster;					
 
 			}
 		)
