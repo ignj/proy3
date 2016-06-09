@@ -54,11 +54,8 @@ myApp.factory('postFactory', function($http, $window, $location){
 		$http.delete('/movies/'+input._id)
 			.then(onSuccess,onError);
 			
-		function onSuccess(data){}
-		
-		function onError(data){
-			if(data.status==404) {
-				//elimino el elemento			
+		function onSuccess(data){
+			//elimino el elemento			
 				console.log("la longitud es", o.posts.length)
 				for(var i = 0; i < o.posts.length; i++) {
 					console.log("elemento ",i," es ",o.posts[i]._id);
@@ -69,7 +66,12 @@ myApp.factory('postFactory', function($http, $window, $location){
 					}				
 				}
 										
-				callback(data);		
+				callback(data);	
+		}
+		
+		function onError(data){
+			if(data.status==404) {
+				console.log("Recurso no encontrado");
 			}
 		}
 	}

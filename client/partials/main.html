@@ -58,9 +58,9 @@
   </ul>
     <label>Search in movies: <input ng-model="searchText"></label>
     <div class="row" ng-repeat="post in posts | filter:searchText">
-		<!--BORRAR-->TITULO {{post.title}}<!--BORRAR-->
-      <div class="col s6"><img ng-src="{{post.poster}}" onerror="imgError(this);"></div>
-      <div class="col s6"><span class="flow-text">		
+		<div class="row" align="center"><font size="5"><b>{{post.title}}</b></font></div>
+		<div class="col s6"><img ng-src="{{post.poster}}" onerror="imgError(this);"></div>
+		<div class="col s6"><span class="flow-text">		
         <div class="inattr" style="max-width: 500px;">
 					<ul>
 						<li><b>Year:</b> {{post.year}}</li>
@@ -70,6 +70,7 @@
 						<li><b>Genre:</b> {{post.genre}}</li>
 						<li><b>Run Time:</b> {{post.runtime}}</li>
 						<li ng-show="isAdmin"><a class="waves-effect waves-light btn blue" href="#/posts/e/{{post._id}}">editar</a></li>
+						<li><a class="waves-effect waves-light btn blue" href="#/posts/{{post._id}}">ver en detalle</a></li>
 						related movies:
 						<li ng-repeat="related in post.relatedMovies | orderBy: 'title'"><a href="#/posts/{{related._id}}">{{related.title}}</a></li>
 					</ul>

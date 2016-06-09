@@ -84,10 +84,11 @@ module.exports = (function(){
 					return next(new Error('Could not load Document'));
 				else{
 					movie.remove(function (err) {
-						if (err) {return next(err)}
+						console.log(err);
+						if (err!=null) {return next(err)}
 						else
 							// if no error, your model is removed
-							return next();
+							res.status(200).send();
 					});
 				}
 
