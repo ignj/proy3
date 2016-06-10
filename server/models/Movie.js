@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Comment = mongoose.model('Comment');
 
 var MovieSchema = new mongoose.Schema({
   title: String,

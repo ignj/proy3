@@ -29,11 +29,14 @@ module.exports = function(app) {
   app.post('/movies', movies.createMovie);
   app.get('/movies', movies.getAllMovies);
   app.get('/movies/:movie', movies.getLinkedObjectsOfMovie);
-  app.put('/movies', movies.editMovie);
+  app.put('/movies', movies.editMovie);    
   app.delete('/movies/:movie', movies.deleteMovie);
 
   //rutas de manejo de peliculas relacionadas
   app.post('/movies/:movie/relatedMovies/', movies.addRelatedMovie);
   app.delete('/movies/:movie/relatedMovies/:relatedMovie', movies.deleteRelatedMovie);
 
+  //rutas para el manejo de comentarios
+  app.post('/movies/:movie/comments/', movies.addComment);
+  app.get('/movies/:movie/comments', movies.getComments);
 };

@@ -79,14 +79,15 @@ myApp.factory('postFactory', function($http, $window, $location){
 		//input es la relatedMovie, id es el id de la pelicula "que la contiene"
 		return $http.post('/movies/'+id+'/relatedMovies/', input)
 			.success(function(res){
+				var retornar;
 				//agrego la nueva pelicula relacionada
 				for(var i = 0; i < o.posts.length; i++) {
 
 					if (o.posts[i]._id == id){
 						//agrego la pelicula  || hay que hacer el parse porque en el controlador se hace stringify
-						o.posts[i]['relatedMovies'].push(JSON.parse(input));
-						var retornar = o.posts[i];
-					}
+						o.posts[i]['relatedMovies'].push(JSON.parse(input));												
+						retornar = o.posts[i];
+					}				
 				}
 				callback (retornar);
 			});
@@ -120,6 +121,25 @@ myApp.factory('postFactory', function($http, $window, $location){
 				//RETORNO LA PELICULA MODIFICADA
 				callback(retornar);
 
+			});
+	}
+	
+	//MANEJO DE COMENTARIOS
+	
+	o.addCommentToMovie = function(input, commentData, callback){
+		console.log("postfactory");
+		return $http.post('/movies/'+input._id+'/comments/',commentData)
+			.success(function(data){
+				console.log("postfactory ",data);								
+				//reemplazo la pelicula
+				for(var i = 0; i < o.posts.length; i++) {
+					
+					if (o.posts[i]._id == input._id){
+						//agrego el comment
+						o.posts[i] = data;
+					}				
+				}
+				callback (data);
 			});
 	}
 

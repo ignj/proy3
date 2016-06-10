@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ui.router', 'ngMaterial']);
+var myApp = angular.module('myApp', ['ui.router', 'ngMaterial', 'angular-input-stars']);
 
 myApp.config([
 '$stateProvider',
