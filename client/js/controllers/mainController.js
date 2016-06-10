@@ -4,7 +4,7 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
   $scope.loginChecked = false;
   $scope.user = false;
   $scope.isAdmin = false;
-  
+
   userFactory.getUserLogin(function(user){
     $scope.user = user;
     $scope.loginChecked = true;
@@ -19,8 +19,8 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
       $location.url('/dashboard');
     }
   });
+
   $scope.createUser = function(input){
-    console.log('make this new user', input);
     //call factory
     userFactory.createUser(input, function(response){
       console.log(response);
@@ -45,15 +45,29 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
     $scope.userData = {};
   }
 
+  $scope.logoutUser = function(input){
+    //call factory
+    userFactory.logoutUser(input, function(response){
+      console.log(response);
+      if(response.err){
+        console.log('there was an error!');
+        $scope.error.message = response.err;
+      } else {
+        console.log('no error, log them in');
+        $location.url('/');
+      }
+    })
+    $scope.userData = {};
+  }
+
   //obtengo las peliculas
   $scope.posts = postFactory.posts;
   $scope.precargarCamposError = ""; //ningun error, replicar codigo en addpost?
 
   //para agregar pelicula
   $scope.addPost = function(input){
-		console.log('entrada addpost', input);
 		postFactory.createMovie(input, function(response){
-			console.log(response);			
+			console.log(response);
 			//restauro los campos
 			$scope.newPost.title = "";
 			$scope.newPost.year = "";
@@ -62,10 +76,10 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
 			$scope.newPost.director = "";
 			$scope.newPost.actors = "";
 			$scope.newPost.plot = "";
-			$scope.newPost.poster = "";	
-			
+			$scope.newPost.poster = "";
+
 		});
-						
+
 	}
 
 	//para cargar pelicula del servicio
@@ -80,8 +94,7 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
 			if (typeof data.Error != 'undefined'){
 				//hubo un error (no de red)
 				$scope.precargarCamposError = data.Error;
-			}
-			else{
+			} else {
 				//limpio un posible error
 				$scope.precargarCamposError ="";
 			}
@@ -96,7 +109,6 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
 				poster = data.Poster;
 
 			//los incorporo a la vista
-
 			$scope.newPost.title = title;
 			$scope.newPost.year = year;
 			$scope.newPost.runtime = runtime;
@@ -104,13 +116,12 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
 			$scope.newPost.director = director;
 			$scope.newPost.actors = actors;
 			$scope.newPost.plot = plot;
-			$scope.newPost.poster = poster;					
-
+			$scope.newPost.poster = poster;
 			}
 		)
 		.error(function (data, status) {
             $scope.precargarCamposError = 'Request failed';
-      });
+    });
 	}
 
   $('.collapsible').collapsible({

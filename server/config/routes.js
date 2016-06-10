@@ -14,7 +14,6 @@ module.exports = function(app) {
 
   //route to test if the user is logged in or not
   app.get('/loggedin', function(req, res){
-    console.log('loggedin?', req.isAuthenticated());
     return res.json(req.isAuthenticated() ? req.user : null);
   });
 

@@ -4,27 +4,25 @@ myApp.factory('postFactory', function($http, $window, $location){
   };
 
   o.createMovie = function(input, callback){
-			console.log('en postFactory', input);
 			$http.post('/movies', input).success(function(data){
-				console.log(data);
 				o.posts.push(data);
 				//la uso como promesa
 				callback(data);
-			});			
+			});
   };
 
   o.getAllMovies = function(){
 		return $http.get('/movies')
-            .success(function (data) {
-            angular.copy(data, o.posts);
-        });
+        .success(function (data) {
+          angular.copy(data, o.posts);
+    });
   };
 
   o.get = function (id) {
 			console.log('en postFactory ', id);
           return $http.get('/movies/' + id)
             .then(function (res) {
-				console.log("en postfactory, valor de retorno ", res.data);
+		          console.log("en postfactory, valor de retorno ", res.data);
               return res.data;
           });
 	};
@@ -44,18 +42,18 @@ myApp.factory('postFactory', function($http, $window, $location){
 				console.log(data);
 			});
   }
-  
+
 
 	o.deleteMovie = function(input, callback){
 		console.log('en postfactory delete', input._id);
 		var idEliminar = input._id;
-		
+
 		//¡¡PREGUNTAR!!
 		$http.delete('/movies/'+input._id)
 			.then(onSuccess,onError);
-			
+
 		function onSuccess(data){
-			//elimino el elemento			
+			//elimino el elemento
 				console.log("la longitud es", o.posts.length)
 				for(var i = 0; i < o.posts.length; i++) {
 					console.log("elemento ",i," es ",o.posts[i]._id);
@@ -63,12 +61,12 @@ myApp.factory('postFactory', function($http, $window, $location){
 						//lo borro
 						delete o.posts[i];
 						console.log("borre elemento ",i," es ",o.posts[i]);
-					}				
+					}
 				}
-										
-				callback(data);	
+
+				callback(data);
 		}
-		
+
 		function onError(data){
 			if(data.status==404) {
 				console.log("Recurso no encontrado");
@@ -83,12 +81,12 @@ myApp.factory('postFactory', function($http, $window, $location){
 			.success(function(res){
 				//agrego la nueva pelicula relacionada
 				for(var i = 0; i < o.posts.length; i++) {
-					
+
 					if (o.posts[i]._id == id){
 						//agrego la pelicula  || hay que hacer el parse porque en el controlador se hace stringify
-						o.posts[i]['relatedMovies'].push(JSON.parse(input));												
+						o.posts[i]['relatedMovies'].push(JSON.parse(input));
 						var retornar = o.posts[i];
-					}				
+					}
 				}
 				callback (retornar);
 			});
@@ -101,15 +99,15 @@ myApp.factory('postFactory', function($http, $window, $location){
 				//recorro las peliculas
 				var retornar;
 				for(var i = 0; i < o.posts.length; i++) {
-					
+
 					if (o.posts[i]._id == id){
 						//elimino la pelicula relacionada
 						console.log("el par id-id es", o.posts[i]._id == id);
 						var listaDeRelacionadas = o.posts[i]['relatedMovies'];
 						var nuevaListaRelacionadas = [];
 						for(var j = 0; j < listaDeRelacionadas.length; j++) {
-							if (listaDeRelacionadas[j]._id == input._id){	
-								//SI LA PELICULA ES LA QUE QUIERO ELIMINAR NO LA AGREGO A LA NUEVA LISTA								
+							if (listaDeRelacionadas[j]._id == input._id){
+								//SI LA PELICULA ES LA QUE QUIERO ELIMINAR NO LA AGREGO A LA NUEVA LISTA
 							}
 							else{
 								nuevaListaRelacionadas.push(listaDeRelacionadas[j]);
@@ -121,7 +119,7 @@ myApp.factory('postFactory', function($http, $window, $location){
 				}
 				//RETORNO LA PELICULA MODIFICADA
 				callback(retornar);
-				
+
 			});
 	}
 

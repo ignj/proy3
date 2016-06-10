@@ -26,9 +26,10 @@ passport.use(new GoogleStrategy({
 					pictureURL: profile._json.image.url,
 					name: profile.displayName,
 					provider: profile.provider,
-					json_info: profile._json
+					json_info: profile._json,
+					type: "admin"
 				});
-				user.type = "admin";
+				//user.type = "admin";
 				user.save(function(err) {
 					if(err) {
 						console.log(err)

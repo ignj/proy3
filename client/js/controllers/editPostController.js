@@ -2,11 +2,10 @@ myApp.controller('editPostController',
 function(actualPost, postFactory, $scope, $http, $location, $log, $window, userFactory){
 
 	$scope.isAdmin = false;
+	// Para obtener el usuario logueado y determina si es admin
   userFactory.getUserLogin(function(user){
     $scope.user = user;
     $scope.loginChecked = true;
-    console.log("en vista el user es:");
-    console.log($scope.user.type);
     if ($scope.user.type == "admin")
       $scope.isAdmin = true;
   });
@@ -14,12 +13,10 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 
 	$scope.actualPost = actualPost;
 	$scope.posts = postFactory.posts;
-	console.log("los posts son", $scope.posts);
 	$scope.precargarCamposError = ""; //ningun error
 
 	//para editar pelicula
 	$scope.editPost = function(input){
-		console.log('entrada editpost', input);
 		postFactory.editMovie(input, function(response){
 			console.log(response);
 		})
@@ -27,17 +24,14 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 
 	//para eliminar la pelicula
 	$scope.eliminarPelicula = function(input){
-		console.log('entrada eliminar ', input);
 		postFactory.deleteMovie(input, function(){
-			console.log("SE ELIMINO-------------");
 			$scope.posts = postFactory.posts;
 			$location.path('/home');
-			$location.replace();					
+			$location.replace();
 		})
 	}
 
 	$scope.votar = function(input){
-		console.log("en votar", input);
 		postFactory.setRating(input, function(response){
 			console.log(response);
 		})
@@ -51,7 +45,6 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 		//llamo al servicio
 		$http.get(query).success( function(data, status){
 			//obtengo los resultados en variables
-
 			if (typeof data.Error != 'undefined'){
 				//hubo un error (no de red)
 				$scope.precargarCamposError = data.Error;
@@ -80,19 +73,17 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 			}
 		)
 		.error(function (data, status) {
-            $scope.precargarCamposError = 'Request failed';
-        });
+      $scope.precargarCamposError = 'Request failed';
+    });
 	}
 
 	//eliminacion de pelicula relacionada
 	$scope.eliminarPeliculaRelacionada = function(input){
 		id = actualPost._id;
-		console.log("peli modif ", id," peli elim ",input._id);
-		postFactory.deleteRelatedMovie(input, id, function(data){			
+		postFactory.deleteRelatedMovie(input, id, function(data){
 			$scope.posts = postFactory.posts;
 			$scope.actualPost = data;
 		});
-		
 	}
 
 	//AUTOCOMPLETADO
@@ -105,9 +96,7 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 
 	function querySearch (query) {
 		var results = query ? $scope.movies.filter( createFilterFor(query) ) : $scope.movies, deferred;
-
-        return results;
-
+    return results;
 	}
 	function searchTextChange(text) {
 		$log.info('Text changed to ' + text);
@@ -120,14 +109,12 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 		if (item != null){
 			id = actualPost._id;
 			postFactory.addRelatedMovie(input, id, function(data){
-				console.log("se agrego la relacionada", data);
 				$scope.posts = postFactory.posts;
-				console.log("data es ",data);
 				$scope.actualPost = data;
 			});
-		}		
+		}
 	}
-	
+
 	//filter function for search query
 	function createFilterFor(query) {
 		var lowercaseQuery = angular.lowercase(query);
@@ -135,7 +122,7 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 			var titulo = movie.title.toLowerCase();
 			return (titulo.indexOf(lowercaseQuery) === 0);
 		};
-	}	
+	}
 
 });
 

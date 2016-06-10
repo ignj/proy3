@@ -1,36 +1,37 @@
 
-<div class="row" style="width: 60%; margin: 0 auto; ">
+<div class="container">
+	<div class="row">
+		<div class="col s12 center">
+			<h1 class="condensed light">{{post.title}}</h1>
+		</div>
+		<div class="col m4 s12">
+			<img ng-src="{{post.poster}}" onerror="imgError(this);">
+		</div>
+		<div class="col m8 s12">
+			<div class="inattr condensed light">
+				<ul>
+					<li><b>Year:</b> {{post.year}}</li>
+					<li><b>Director:</b> {{post.director}}</li>
+					<li><b>Actors:</b> {{post.actors}}</li>
+					<li><b>Plot:</b> {{post.plot}}</li>
+					<li><b>Genre:</b> {{post.genre}}</li>
+					<li><b>Run Time:</b> {{post.runtime}}</li>
+				</ul>
+			</div>
+		</div>
 
-				<div class="cover" style="float: left;">
-					<img ng-src="{{post.poster}}" onerror="imgError(this);">
-					
-				</div>
-				<div class="mdesc" style="float: right;">
-					<div class="name">
-						<h1>{{post.title}}</h1>
-					</div>
-					<div class="inattr" style="max-width: 500px;">
-						<ul>
-							<li><b>Year:</b> {{post.year}}</li> 					 	 
-							<li><b>Director:</b> {{post.director}}</li> 					  
-							<li><b>Actors:</b> {{post.actors}}</li> 					  
-							<li><b>Plot:</b> {{post.plot}}</li> 					  
-							<li><b>Genre:</b> {{post.genre}}</li> 					   					   
-							<li><b>Run Time:</b> {{post.runtime}}</li> 					   					   							
-						</ul>
-					</div>
-				</div>						
-</div>		
-<div style="width: 60%; margin: 0 auto; ">
-	comentarios
-	<script src="https://apis.google.com/js/plusone.js"></script>
-		<div id="comments"></div>
-		<script>
-			gapi.comments.render('comments', {
-				href: window.location,
-				width: '624',
-				first_party_property: 'BLOGGER',
-				view_type: 'FILTERED_POSTMOD'
-			});
-		</script>
+		<div>
+			comentarios
+			<script src="https://apis.google.com/js/plusone.js"></script>
+				<div id="comments"></div>
+				<script>
+					gapi.comments.render('comments', {
+						href: window.location,
+						width: '624',
+						first_party_property: 'BLOGGER',
+						view_type: 'FILTERED_POSTMOD'
+					});
+				</script>
+		</div>
+	</div>
 </div>
