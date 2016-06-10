@@ -1,7 +1,19 @@
-myApp.controller('readPostController',
-function(post, $scope){
+myApp.controller('readPostController', function(post, $scope, postFactory){
 	    
 	$scope.post = post;
+	$scope.newRate = {};
+	
+	$scope.rateMovie = function(input){
+		console.log("grabar ",$scope.newRate.rate," ",$scope.newRate.comment," en ",post);
+		//agrego id y nombre de usuario truchos
+		$scope.newRate.idAuthor = 999;
+		$scope.newRate.authorName = "camelCaseGuy";
+		
+		postFactory.addCommentToMovie(input, angular.copy($scope.newRate), function(response){
+			console.log("response ",response);
+			$scope.post = response;			
+		})
+	}
 	
 });
 

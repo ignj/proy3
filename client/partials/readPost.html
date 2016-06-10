@@ -1,14 +1,11 @@
-
+<div class="row" align="center"><font size="5"><b>{{post.title}}</b></font></div>
 <div class="row" style="width: 60%; margin: 0 auto; ">
 
 				<div class="cover" style="float: left;">
 					<img ng-src="{{post.poster}}" onerror="imgError(this);">
 					
 				</div>
-				<div class="mdesc" style="float: right;">
-					<div class="name">
-						<h1>{{post.title}}</h1>
-					</div>
+				<div class="mdesc" style="float: right;">					
 					<div class="inattr" style="max-width: 500px;">
 						<ul>
 							<li><b>Year:</b> {{post.year}}</li> 					 	 
@@ -17,20 +14,30 @@
 							<li><b>Plot:</b> {{post.plot}}</li> 					  
 							<li><b>Genre:</b> {{post.genre}}</li> 					   					   
 							<li><b>Run Time:</b> {{post.runtime}}</li> 					   					   							
+							related movies:
+							<li ng-repeat="related in post.relatedMovies | orderBy: 'title'"><a href="#/posts/{{related._id}}">{{related.title}}</a></li>
 						</ul>
 					</div>
 				</div>						
 </div>		
 <div style="width: 60%; margin: 0 auto; ">
-	comentarios
-	<script src="https://apis.google.com/js/plusone.js"></script>
-		<div id="comments"></div>
-		<script>
-			gapi.comments.render('comments', {
-				href: window.location,
-				width: '624',
-				first_party_property: 'BLOGGER',
-				view_type: 'FILTERED_POSTMOD'
-			});
-		</script>
+	
+	<div class="row">
+		<font size="3"><b>Calificar:</b></font>
+		<input-stars max="5" icon-base="fa fa-fw" icon-empty="fa-star-o" icon-hover="hover" icon-full="fa-star" ng-model="newRate.rate"></input-stars>	
+		<input type="text" placeholder="Ingrese un comentario.." ng-model="newRate.comment"></input>		
+		<a ng-click="rateMovie(post)" class="waves-effect waves-light btn blue">Enviar</a>
+	</div>
+	
+	<div class="row" ng-repeat="comment in post.comments">
+		<div class="row valign-wrapper">
+			<div class="left-align valign"><b>{{comment.author}}</b></div>
+			<div class="right-align valign"><input-stars max="5" readonly="true" icon-base="fa fa-fw" icon-empty="fa-star-o" icon-hover="hover" icon-full="fa-star" ng-model="comment.rating"></input-stars></div>
+		</div>
+		<div>
+			{{comment.body}}
+		</div>
+	</div>	
+	
+	
 </div>
