@@ -6,6 +6,10 @@ var Movie = mongoose.model('Movie');
 module.exports = (function(){
 	return{
 		createMovie: function(req, res){
+			if (req.user.type != "admin") {
+				var error = new Error('no eres admin ');
+				return next(error);
+			}
 			console.log('en controlador movies');
 			var movie = new Movie({
 				title: req.body.title,
@@ -29,6 +33,10 @@ module.exports = (function(){
 			})
 		},
 		editMovie: function(req, res){
+			if (req.user == null) {
+				var error = new Error('no eres admin ');
+				return next(error);
+			}
 			console.log("en editar ",req.body);
 			Movie.findById(req.body._id, function(err, movie){
 				if(!movie)
@@ -55,6 +63,10 @@ module.exports = (function(){
 		},
 
 		setRating: function(req, res){
+			if (req.user != null) {
+				var error = new Error('no eres admin ');
+				return next(error);
+			}
 			console.log("entro a setRating");
 			Movie.findById(req.body._id, function(err, movie){
 				if(!movie)
@@ -78,6 +90,10 @@ module.exports = (function(){
 			});
 		},
 		deleteMovie: function(req, res, next){
+			if (req.user.type != "admin") {
+				var error = new Error('no eres admin ');
+				return next(error);
+			}
 			console.log("pelicula a eliminar", req.movie);
 			Movie.findById(req.movie._id, function(err,movie){
 				if(!movie)
@@ -135,6 +151,10 @@ module.exports = (function(){
 		  res.json(req.movie);
 		},
 		addRelatedMovie: function(req, res, next){
+			if (req.user != null) {
+				var error = new Error('no eres admin ');
+				return next(error);
+			}
 			console.log("pelicula a modificar", req.movie);
 			console.log("cuerpo mensaje ",req.body);
 
@@ -167,6 +187,10 @@ module.exports = (function(){
 
 		},
 		deleteRelatedMovie: function(req, res, next){
+			if (req.user.type != "admin") {
+				var error = new Error('no eres admin ');
+				return next(error);
+			}
 			//console.log("movie ",req.params.movie," req.params.relatedMovie ", req.params.relatedMovie);
 			//recupero aca los parametros porque en routes.js solo
 			//recupera un solo document y es bastante confuso

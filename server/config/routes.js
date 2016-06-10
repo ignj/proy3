@@ -30,10 +30,8 @@ module.exports = function(app) {
   app.post('/movies', movies.createMovie);
   app.get('/movies', movies.getAllMovies);
   app.get('/movies/:movie', movies.getLinkedObjectsOfMovie);
-  app.put('/movies', movies.editMovie);    
+  app.put('/movies', movies.editMovie);
   app.delete('/movies/:movie', movies.deleteMovie);
-  
-  app.put('/setrating', movies.setRating); //<--fijate que esto deberia ser /movies/:movie/setrating
 
   //rutas de manejo de peliculas relacionadas
   app.post('/movies/:movie/relatedMovies/', movies.addRelatedMovie);
