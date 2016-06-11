@@ -15,10 +15,6 @@ function($stateProvider, $urlRouterProvider) {
 				}]
 			}
 	})
-  .state('loggedin', {
-    url: '/',
-    templateUrl: '/partials/dashboard.html'
-  })
 	.state('postEdition', {
 		url: '/posts/e/:id',
 		templateUrl: '/partials/editPost.html',
@@ -34,7 +30,7 @@ function($stateProvider, $urlRouterProvider) {
 	})
 	.state('posts', {
 		url: '/posts/:id',
-		templateUrl: '/partials/readPost.html',	  						
+		templateUrl: '/partials/readPost.html',
 		resolve: {
             post: ['$stateParams', 'postFactory', function ($stateParams, postFactory) {
                 return postFactory.get($stateParams.id);
@@ -45,20 +41,3 @@ function($stateProvider, $urlRouterProvider) {
 
   $urlRouterProvider.otherwise('home');
 }]);
-
-
-	//esto de abajo es con el ruteo de ngRouting. lo cambie por
-	//el framework ui.router porque es mas "novedoso y completo"
-  /*.config(function($routeProvider, $httpProvider){
-    $routeProvider
-    .when('/', {
-      templateUrl: '/partials/main.html'
-    })
-    .when('/dashboard', {
-      templateUrl: '/partials/dashboard.html'
-    })
-    .otherwise({
-      redirectTo:'/'
-    });
-  })
-*/
