@@ -3,12 +3,12 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 
 	$scope.isAdmin = false;
 	// Para obtener el usuario logueado y determina si es admin
-  userFactory.getUserLogin(function(user){
-    $scope.user = user;
-    $scope.loginChecked = true;
-    if ($scope.user.type == "admin")
-      $scope.isAdmin = true;
-  });
+	userFactory.getUserLogin(function(user){
+		$scope.user = user;
+		$scope.loginChecked = true;
+		if ($scope.user.type == "admin")
+		  $scope.isAdmin = true;
+	});
 
 
 	$scope.actualPost = actualPost;

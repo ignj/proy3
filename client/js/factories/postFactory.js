@@ -127,7 +127,7 @@ myApp.factory('postFactory', function($http, $window, $location){
 	//MANEJO DE COMENTARIOS
 	
 	o.addCommentToMovie = function(input, commentData, callback){
-		console.log("postfactory");
+		console.log("postfactory commentData ", commentData);
 		return $http.post('/movies/'+input._id+'/comments/',commentData)
 			.success(function(data){
 				console.log("postfactory ",data);								
@@ -139,6 +139,16 @@ myApp.factory('postFactory', function($http, $window, $location){
 						o.posts[i] = data;
 					}				
 				}
+				callback (data);
+			});
+	}
+	
+	o.deleteCommentFromMovie = function(movie, commentData, callback){
+		console.log("postfactory movie ", movie, " comment ", commentData);
+		return $http.delete('/movies/'+movie._id+'/comments/'+commentData.idAuthor)
+			.success(function(data){
+				console.log("postfactory ",data);								
+				
 				callback (data);
 			});
 	}

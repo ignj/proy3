@@ -39,4 +39,5 @@ module.exports = function(app) {
   //rutas para el manejo de comentarios
   app.post('/movies/:movie/comments/', movies.addComment);
   app.get('/movies/:movie/comments', movies.getComments);
+  app.delete('/movies/:movie/comments/:comment', movies.deleteComment);
 };

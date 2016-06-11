@@ -2,11 +2,11 @@
 	<div class="col s12 center">
 		<h3 class="condensed light">{{post.title}}</h3>
 	</div>
-	<div class="row">			
-			<div class="col m4 s12">
+	<div class="row">
+			<div class="col l5 m7 s12">
 				<img ng-src="{{post.poster}}" onerror="imgError(this);">
 			</div>
-			<div class="col m8 s12">
+			<div class="col l7 m5 s12">
 				<div class="inattr condensed light">
 					<ul>
 						<li><b>Year:</b> {{post.year}}</li>
@@ -20,26 +20,27 @@
 					</ul>
 				</div>
 			</div>
-	</div>		
+	</div>
 </div>
-<div style="width: 60%; margin: 0 auto; ">
-	
+<div class="container">
+
 	<div class="row">
-		<font size="3"><b>Calificar:</b></font>
-		<input-stars max="5" icon-base="fa fa-fw" icon-empty="fa-star-o" icon-hover="hover" icon-full="fa-star" ng-model="newRate.rate"></input-stars>	
-		<input type="text" placeholder="Ingrese un comentario.." ng-model="newRate.comment"></input>		
+		<font class="thin"><b>Calificar:</b></font>
+		<input-stars max="5" icon-base="fa fa-fw" icon-empty="fa-star-o" icon-hover="hover" icon-full="fa-star" ng-model="newRate.rate"></input-stars>
+		<input type="text" placeholder="Ingrese un comentario.." ng-model="newRate.comment"></input>
 		<a ng-click="rateMovie(post)" class="waves-effect waves-light btn blue">Enviar</a>
 	</div>
-	
-	<div class="row" ng-repeat="comment in post.comments">
+
+	<div class="row" ng-repeat="comment in post.comments | orderBy: 'rating':true">
 		<div class="row valign-wrapper">
-			<div class="left-align valign"><b>{{comment.author}}</b></div>
+			<div class="left-align valign"><b class="medium">{{comment.author}}</b></div>
 			<div class="right-align valign"><input-stars max="5" readonly="true" icon-base="fa fa-fw" icon-empty="fa-star-o" icon-hover="hover" icon-full="fa-star" ng-model="comment.rating"></input-stars></div>
+			<button ng-if="comment.idAuthor == user.username" ng-click="deleteComment(comment)" >Delete </button>
 		</div>
-		<div>
+		<div class="condensed light">			
 			{{comment.body}}
 		</div>
-	</div>	
-	
-	
+	</div>
+
+
 </div>

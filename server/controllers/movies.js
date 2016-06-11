@@ -235,13 +235,16 @@ module.exports = (function(){
 						var nuevo = new Comment({body: req.body.comment, author: req.body.authorName, idAuthor: req.body.idAuthor, rating: req.body.rate});
 						nuevo.save(function (err) {
 						if (err) {                                
-							console.log("err");
+							console.log("error al crear", err);
 						} else {
 								console.log("se grabo nuevo");
 								movie.comments.push(nuevo);
 						 
 								movie.save(function(err, movie) {
-									if(err){ return next(err); }
+									if(err){ 
+										return next(err); 
+										console.log("error al guardar");
+									}
 									console.log("return ",movie);
 									res.json(movie);
 								});
@@ -256,14 +259,17 @@ module.exports = (function(){
 						 nuevo = new Comment({body: req.body.comment, author: req.body.authorName, idAuthor: req.body.idAuthor, rating: req.body.rate});
 						 nuevo.save(function (err) {
 						if (err) {                                
-							console.log("err");
+							console.log("error al reemplazar");
 						} else {
 								console.log("se grabo nuevo");
 								movie.comments.pull(aSacar);
 								movie.comments.push(nuevo);
 						 
 								movie.save(function(err, movie) {
-									if(err){ return next(err); }
+									if(err){ 
+										console.log("error al guardar reemplazo", err);
+										return next(err); 
+									}
 									console.log("return ",movie);
 									res.json(movie);
 								});
@@ -283,6 +289,45 @@ module.exports = (function(){
 			//});
 
 		},
+		deleteComment: function(req,res,next){			
+			console.log("req ",req.params);
+			Movie.findById(req.movie._id)
+				 .populate('comments')
+				 .exec(function(err,movie){
+					 console.log("comments es ",movie.comments);
+					 if (err) {return next(err);}
+					 var existe = false;
+					 var aSacar;
+					 movie.comments.forEach(function(comment){						 
+						if (comment.idAuthor == req.params.comment){
+							console.log("comment id ",comment.idAuthor," req.body ",req.params.comment);
+							//el autor ya califico
+							existe=true;
+							aSacar = comment;
+						} 
+					 });
+
+					if (!existe){
+						//si no existe error
+						console.log("error al eliminar comentario");
+						return next(new Error('Could not delete comment'));
+						 
+					}
+					 else{
+						 //la calificacion existe y la elimino
+						 						 
+						movie.comments.pull(aSacar);		
+						movie.save(function(err, movie) {
+							if(err){ 
+								console.log("error al guardar reemplazo", err);
+								return next(err); 
+							}
+							console.log("return ",movie);
+							res.json(movie);
+						});
+					}
+				});
+		},		
 		getComments: function(req,res,next){
 			Movie.findById(req.movie._id)
 				 .populate('comments')

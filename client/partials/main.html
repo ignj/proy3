@@ -9,45 +9,46 @@
 			  <div class="row">
 					<form ng-submit="addPost(newPost)" class="col s12">
 				  <div class="row">
-						<div class="input-field col s6">
-						  <input type="text" class="validate" ng-model="newPost.title"></input>
-					  <label>Title</label>
+						<div class="row valign-wrapper">
+							<div class="input-field col s11 valign">
+								<input type="text" id="title" class="validate" ng-model="newPost.title"></input>
+								<label class="active" id="precargarCamposError" for="title">Title | {{precargarCamposError}}</label>
+							</div>
+							<div class="col s1 valign">
+								<i class="material-icons" ng-click="precargarCampos(newPost.title)">cloud_download</i>
+							</div>
 						</div>
 						<div class="input-field col s6">
-						  <input type="text" class="validate" ng-model="newPost.year"></input>
-					  <label>Year</label>
+							<input type="text" id="year" class="validate" ng-model="newPost.year"></input>
+							<label class="active" for="year">Year</label>
 						</div>
 						<div class="input-field col s6">
-						  <input type="text" class="validate" ng-model="newPost.runtime"></input>
-					  <label>Runtime</label>
+							<input type="text" id="runtime" class="validate" ng-model="newPost.runtime"></input>
+							<label class="active" for="runtime">Runtime</label>
 						</div>
 						<div class="input-field col s6">
-						  <input type="text" class="validate" ng-model="newPost.genre"></input>
-					  <label>Genre</label>
+							<input type="text" id="genre" class="validate" ng-model="newPost.genre"></input>
+							<label class="active" for="genre">Genre</label>
 						</div>
 						<div class="input-field col s6">
-						  <input type="text" class="validate" ng-model="newPost.director"></input>
-					  <label>Director</label>
+							<input type="text" id="director" class="validate" ng-model="newPost.director"></input>
+							<label class="active" for="director">Director</label>
 						</div>
 						<div class="input-field col s6">
-						  <input type="text" class="validate" ng-model="newPost.actors"></input>
-					  <label>Actors</label>
+							<input type="text" id="actors" class="validate" ng-model="newPost.actors"></input>
+							<label class="active" for="actors">Actors</label>
 						</div>
-						<div class="input-field col s6">
-						  <input type="text" class="validate" ng-model="newPost.plot"></input>
-					  <label>Plot</label>
+						<div class="input-field col s12">
+							<input type="text" id="plot" class="validate" ng-model="newPost.plot"></input>
+							<label class="active" for="plot">Plot</label>
 						</div>
-						<div class="input-field col s6">
-						  <input type="text" class="validate" ng-model="newPost.poster"></input>
-					  <label>Poster</label>
-						</div>
-					<!--div class="input-field col s6">
-						  <input type="text" class="validate" placeholder="RelatedMovies" ng-model="newPost.relatedMovie"></input>
-					  <label>Related movies</label>
-						</div-->
+						<div class="input-field col s12">
+							<input type="text" id="poster" class="validate" ng-model="newPost.poster"></input>
+							<label class="active" for="">Poster</label>
+						</div>					
 					<div class="input-field col s12 right-align">
 						  <button type="submit" class="waves-effect waves-light btn blue">Post</button>
-					  <a ng-click="precargarCampos(newPost.title)" class="waves-effect waves-light btn blue">precargar campos</a>
+					  <!--a ng-click="precargarCampos(newPost.title)" class="waves-effect waves-light btn blue">precargar campos</a-->
 					</div>
 				  </div>
 						   <label id="precargarCamposError">{{precargarCamposError}}</label>
@@ -61,8 +62,8 @@
     <label>Search in movies: <input ng-model="searchText"></label>
     <div class="row" ng-repeat="post in posts | filter:searchText">
   		<div class="row" align="center"><font size="5"><b class="condensed light">{{post.title}}</b></font></div>
-  		<div class="col m4 s12"><img ng-src="{{post.poster}}" onerror="imgError(this);"></div>
-  		<div class="col m8 s12">
+  		<div class="col l5 m7 s12"><img ng-src="{{post.poster}}" onerror="imgError(this);"></div>
+  		<div class="col l7 m5 s12">
 			<span class="condensed light medium">
 				<div class="inattr" style="max-width: 500px;">
 							<ul>

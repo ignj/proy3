@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var CommentSchema = new mongoose.Schema({
   body: String,
   author: String,
-  idAuthor: Number,
+  idAuthor: String,
   rating: Number,
   //movie: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }
 });
