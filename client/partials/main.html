@@ -2,58 +2,58 @@
 <div ng-controller='mainController' class="container">
   <ul class="collapsible popout" data-collapsible="accordion">
     <li>
-      <div class="collapsible-header"><i class="material-icons">add</i>Add movie</div>
+      <div ng-show="isAdmin" class="collapsible-header"><i class="material-icons">add</i>Add movie</div>
     	<div ng-show="isAdmin" class="collapsible-body">
-        <div class="container">
-          <h3 class="thin">Agregar pelicula</h3>
-          <div class="row">
-        		<form ng-submit="addPost(newPost)" class="col s12">
-              <div class="row">
-          			<div class="input-field col s6">
-          			  <input type="text" class="validate" ng-model="newPost.title"></input>
-                  <label>Title</label>
-          			</div>
-          			<div class="input-field col s6">
-          			  <input type="text" class="validate" ng-model="newPost.year"></input>
-                  <label>Year</label>
-          			</div>
-          			<div class="input-field col s6">
-          			  <input type="text" class="validate" ng-model="newPost.runtime"></input>
-                  <label>Runtime</label>
-          			</div>
-          			<div class="input-field col s6">
-          			  <input type="text" class="validate" ng-model="newPost.genre"></input>
-                  <label>Genre</label>
-          			</div>
-          			<div class="input-field col s6">
-          			  <input type="text" class="validate" ng-model="newPost.director"></input>
-                  <label>Director</label>
-          			</div>
-          			<div class="input-field col s6">
-          			  <input type="text" class="validate" ng-model="newPost.actors"></input>
-                  <label>Actors</label>
-          			</div>
-          			<div class="input-field col s6">
-          			  <input type="text" class="validate" ng-model="newPost.plot"></input>
-                  <label>Plot</label>
-          			</div>
-          			<div class="input-field col s6">
-          			  <input type="text" class="validate" ng-model="newPost.poster"></input>
-                  <label>Poster</label>
-          			</div>
-                <div class="input-field col s6">
-          			  <input type="text" class="validate" placeholder="RelatedMovies" ng-model="newPost.relatedMovie"></input>
-                  <label>Related movies</label>
-          			</div>
-                <div class="input-field col s12 right-align">
-          			  <button type="submit" class="waves-effect waves-light btn blue">Post</button>
-                  <a ng-click="precargarCampos(newPost.title)" class="waves-effect waves-light btn blue">precargar campos</a>
-                </div>
-              </div>
-			           <label id="precargarCamposError">{{precargarCamposError}}</label>
-        		</form>
-          </div>
-        </div>
+			<div class="container">
+			  <h3 class="thin">Agregar pelicula</h3>
+			  <div class="row">
+					<form ng-submit="addPost(newPost)" class="col s12">
+				  <div class="row">
+						<div class="input-field col s6">
+						  <input type="text" class="validate" ng-model="newPost.title"></input>
+					  <label>Title</label>
+						</div>
+						<div class="input-field col s6">
+						  <input type="text" class="validate" ng-model="newPost.year"></input>
+					  <label>Year</label>
+						</div>
+						<div class="input-field col s6">
+						  <input type="text" class="validate" ng-model="newPost.runtime"></input>
+					  <label>Runtime</label>
+						</div>
+						<div class="input-field col s6">
+						  <input type="text" class="validate" ng-model="newPost.genre"></input>
+					  <label>Genre</label>
+						</div>
+						<div class="input-field col s6">
+						  <input type="text" class="validate" ng-model="newPost.director"></input>
+					  <label>Director</label>
+						</div>
+						<div class="input-field col s6">
+						  <input type="text" class="validate" ng-model="newPost.actors"></input>
+					  <label>Actors</label>
+						</div>
+						<div class="input-field col s6">
+						  <input type="text" class="validate" ng-model="newPost.plot"></input>
+					  <label>Plot</label>
+						</div>
+						<div class="input-field col s6">
+						  <input type="text" class="validate" ng-model="newPost.poster"></input>
+					  <label>Poster</label>
+						</div>
+					<!--div class="input-field col s6">
+						  <input type="text" class="validate" placeholder="RelatedMovies" ng-model="newPost.relatedMovie"></input>
+					  <label>Related movies</label>
+						</div-->
+					<div class="input-field col s12 right-align">
+						  <button type="submit" class="waves-effect waves-light btn blue">Post</button>
+					  <a ng-click="precargarCampos(newPost.title)" class="waves-effect waves-light btn blue">precargar campos</a>
+					</div>
+				  </div>
+						   <label id="precargarCamposError">{{precargarCamposError}}</label>
+					</form>
+			  </div>
+			</div>
     	</div>
     </li>
 
@@ -62,23 +62,25 @@
     <div class="row" ng-repeat="post in posts | filter:searchText">
   		<div class="row" align="center"><font size="5"><b class="condensed light">{{post.title}}</b></font></div>
   		<div class="col m4 s12"><img ng-src="{{post.poster}}" onerror="imgError(this);"></div>
-  		<div class="col m8 s12"><span class="condensed light medium">
-          <div class="inattr" style="max-width: 500px;">
-  					<ul>
-  						<li><b>Year:</b> {{post.year}}</li>
-  						<li><b>Director:</b> {{post.director}}</li>
-  						<li><b>Actors:</b> {{post.actors}}</li>
-  						<li><b>Plot:</b> {{post.plot}}</li>
-  						<li><b>Genre:</b> {{post.genre}}</li>
-  						<li><b>Run Time:</b> {{post.runtime}}</li>
-  						related movies:
-  						<li ng-repeat="related in post.relatedMovies | orderBy: 'title'"><a href="#/posts/{{related._id}}">{{related.title}}</a></li>
-  					</ul>
-            <div>
-              <a ng-show="isAdmin" class="waves-effect waves-light btn blue" href="#/posts/e/{{post._id}}">editar</a>
-              <a class="waves-effect waves-light btn blue" href="#/posts/{{post._id}}">ver en detalle</a>
-            </div>
-  				</div>
-        </span></div>
+  		<div class="col m8 s12">
+			<span class="condensed light medium">
+				<div class="inattr" style="max-width: 500px;">
+							<ul>
+								<li><b>Year:</b> {{post.year}}</li>
+								<li><b>Director:</b> {{post.director}}</li>
+								<li><b>Actors:</b> {{post.actors}}</li>
+								<li><b>Plot:</b> {{post.plot}}</li>
+								<li><b>Genre:</b> {{post.genre}}</li>
+								<li><b>Run Time:</b> {{post.runtime}}</li>
+								<b>Related Movies:</b>
+								<li ng-repeat="related in post.relatedMovies | orderBy: 'title'"><a href="#/posts/{{related._id}}">{{related.title}}</a></li>
+							</ul>
+					<div>
+					  <a ng-show="isAdmin" class="waves-effect waves-light btn blue" href="#/posts/e/{{post._id}}">editar</a>
+					  <a class="waves-effect waves-light btn blue" href="#/posts/{{post._id}}">ver en detalle</a>
+					</div>
+				</div>
+			</span>
+		</div>
     </div>
 </div>

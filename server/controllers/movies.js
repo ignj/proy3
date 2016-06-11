@@ -64,7 +64,7 @@ module.exports = (function(){
 				}
 			});
 		},
-
+	/*
 		setRating: function(req, res){
 			if (req.user != null) {
 				var error = new Error('no eres admin ');
@@ -89,7 +89,7 @@ module.exports = (function(){
 					});
 				}
 			});
-		},
+		},*/
 		deleteMovie: function(req, res, next){
 			if (req.user.type != "admin") {
 				var error = new Error('no eres admin ');
@@ -138,7 +138,7 @@ module.exports = (function(){
 		  res.json(req.movie);
 		},
 		addRelatedMovie: function(req, res, next){
-			if (req.user != null) {
+			if (req.user.type != "admin") {
  				var error = new Error('no eres admin ');
  				return next(error);
  			}

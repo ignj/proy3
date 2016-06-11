@@ -19,7 +19,7 @@ passport.use(new GoogleStrategy({
 
 			//if(!user) {
 			// esto estaba (user) per no anda si el usuario no esta en la base de datos
- 			if(!user) {
+ 			if(user) {
 				user = new User({
 					authId: profile.id,
 					username: profile._json.id, //should change this later

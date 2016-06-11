@@ -2,48 +2,53 @@
 	<div ng-show="isAdmin" class="row">
 		<div class="col s12 m4 l2"><p></p></div>
 		<div class="row col s12 m4 l8">
-			<h3 class="thin"> editar pelicula </h3>
+			<h3 class="thin center-align"> Edition </h3>
 			<md-content class="md-padding">
-			<form ng-submit="editPost(actualPost)" id="formEdicion" class="col s12">
-				<div class="row">
-					<div class="input-field col s6">
-						<input type="text" class="validate" placeholder="" ng-model="actualPost.title"></input>
-						<label>Title</label>
-					</div>
+				<form ng-submit="editPost(actualPost)" id="formEdicion" class="col s12">
 					<div class="row">
-					<div class="input-field col s6">
-						<input type="text" class="validate" placeholder="" ng-model="actualPost.year"></input>
-						<label>Year</label>
+						<div class="row valign-wrapper">
+							<div class="input-field col s11 valign">
+								<input type="text" id="title" class="validate" placeholder="Title" ng-model="actualPost.title"></input>
+								<label class="active" id="precargarCamposError" for="title">Title | {{precargarCamposError}}</label>
+								<!--label id="precargarCamposError" for="title">{{precargarCamposError}}</label-->
+							</div>												
+							<div class="col s1 valign">
+								<i class="material-icons" ng-click="precargarCampos(actualPost.title)">cloud_download</i>
+								<!--i class="fa fa-cloud-upload fa-2x" ng-click="precargarCampos(actualPost.title)" aria-hidden="true"></i-->							
+							</div>
+						</div>
+						<div class="input-field col s6">
+							<input type="text" id="year" class="validate" placeholder="Year" ng-model="actualPost.year"></input>							
+							<label class="active" id="year">Year</label>
+						</div>
+						<div class="input-field col s6">
+							<input type="text" id="runtime" class="validate" placeholder="Runtime" ng-model="actualPost.runtime"></input>
+							<label class="active" id="runtime">Runtime</label>
+						</div>
+						<div class="input-field col s6">
+							<input type="text" id="genre" class="validate" placeholder="Genre" ng-model="actualPost.genre"></input>
+							<label class="active" id="genre">Genre</label>
+						</div>
+						<div class="input-field col s6">
+							<input type="text" id="director" class="validate" placeholder="Director" ng-model="actualPost.director"></input>
+							<label class="active" id="director">Director</label>
+						</div>
+						<div class="input-field col s6">
+							<input type="text" id="actors" class="validate" placeholder="Actors" ng-model="actualPost.actors"></input>
+							<label class="active" id="actors">Actors</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="text" id="plot" class="validate" placeholder="Plot" ng-model="actualPost.plot"></input>
+							<label class="active" id="plot">Plot</label>
+						</div>
+						<div class="input-field col s12">
+							<input type="text" id="poster" class="validate" placeholder="Poster is a valid http://.." ng-model="actualPost.poster"></input>
+							<label class="active" id="">Poster</label>
+						</div>						
 					</div>
-					<div class="input-field col s6">
-						<input type="text" class="validate" placeholder="" ng-model="actualPost.runtime"></input>
-						<label>Runtime</label>
-					</div>
-					<div class="input-field col s6">
-						<input type="text" class="validate" placeholder="" ng-model="actualPost.genre"></input>
-						<label>Genre</label>
-					</div>
-					<div class="input-field col s6">
-						<input type="text" class="validate" placeholder="" ng-model="actualPost.director"></input>
-						<label>Director</label>
-					</div>
-					<div class="input-field col s6">
-						<input type="text" class="validate" placeholder="" ng-model="actualPost.actors"></input>
-						<label>Actors</label>
-					</div>
-					<div class="input-field col s6">
-						<input type="text" class="validate" placeholder="" ng-model="actualPost.plot"></input>
-						<label>Plot</label>
-					</div>
-					<div class="input-field col s6">
-						<input type="text" class="validate" placeholder="" ng-model="actualPost.poster"></input>
-						<label>Poster</label>
-					</div>
-					<div class="input-field col s6">
-						<input type="text" class="validate" placeholder="" ng-model="actualPost.relatedMovie"></input>
-						<label>Rrelated movies</label>
-					</div>
-				</div>
+				</form>
+			</md-content>
+			
 				<div>
 
 					Related Movies:
@@ -52,7 +57,7 @@
 							<a href="#/posts/{{related._id}}">
 								{{related.title}}
 							</a>
-							<button ng-click="eliminarPeliculaRelacionada(related)" form="eliminarPeliculaRelacionada" class="btn btn-danger blue">
+							<button ng-click="eliminarPeliculaRelacionada(related)" class="btn btn-danger blue">
 								Delete
 							</button>
 						</li>
@@ -81,16 +86,13 @@
 					</md-content>
 				</div>
 
-				<div class="input-field col s12 right-align">
-					<button ng-click="eliminarPelicula(actualPost)" class="btn btn-danger  red darken-2">Delete</button>
-					<button ng-click="precargarCampos(actualPost.title)" class="btn btn-success blue">precargar campos</button>
+				<div class="input-field col s12 right-align">										
 					<button type="submit" form="formEdicion" class="btn btn-warning blue">Edit</button>
-					<a class="btn btn-primary blue" ng-click="votar(actualPost)">votar</a>
+					<button ng-click="eliminarPelicula(actualPost)" class="btn btn-danger  red darken-2">Delete</button>
+					<!--a class="btn btn-primary blue" ng-click="votar(actualPost)">votar</a-->
 				</div>
-			</form>
-			</md-content>
-
-			<label id="precargarCamposError">{{precargarCamposError}}</label>
+						
+			
 
 		</div>
 	</div>
