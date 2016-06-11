@@ -61,7 +61,7 @@
   </ul>
     <label>Search in movies: <input ng-model="searchText"></label>
     <div class="row" ng-repeat="post in posts | filter:searchText">
-  		<div class="row" align="center"><font size="5"><b class="condensed light">{{post.title}}</b></font></div>
+  		<div class="row" align="center"><font size="5"><a class="waves-effect waves-light" href="#/posts/{{post._id}}"><b class="condensed light black-text" href="#/posts/{{post._id}}">{{post.title}}</b></a></font></div>
   		<div class="col l5 m7 s12"><img ng-src="{{post.poster}}" onerror="imgError(this);"></div>
   		<div class="col l7 m5 s12">
 			<span class="condensed light medium">
@@ -78,7 +78,6 @@
 							</ul>
 					<div>
 					  <a ng-show="isAdmin" class="waves-effect waves-light btn blue" href="#/posts/e/{{post._id}}">editar</a>
-					  <a class="waves-effect waves-light btn blue" href="#/posts/{{post._id}}">ver en detalle</a>
 					</div>
 				</div>
 			</span>
