@@ -10,15 +10,13 @@
 							<div class="input-field col s11 valign">
 								<input type="text" id="title" class="validate" placeholder="Title" ng-model="actualPost.title"></input>
 								<label class="active" id="precargarCamposError" for="title">Title | {{precargarCamposError}}</label>
-								<!--label id="precargarCamposError" for="title">{{precargarCamposError}}</label-->
-							</div>												
+							</div>
 							<div class="col s1 valign">
 								<i class="material-icons" ng-click="precargarCampos(actualPost.title)">cloud_download</i>
-								<!--i class="fa fa-cloud-upload fa-2x" ng-click="precargarCampos(actualPost.title)" aria-hidden="true"></i-->							
 							</div>
 						</div>
 						<div class="input-field col s6">
-							<input type="text" id="year" class="validate" placeholder="Year" ng-model="actualPost.year"></input>							
+							<input type="text" id="year" class="validate" placeholder="Year" ng-model="actualPost.year"></input>
 							<label class="active" id="year">Year</label>
 						</div>
 						<div class="input-field col s6">
@@ -44,11 +42,11 @@
 						<div class="input-field col s12">
 							<input type="text" id="poster" class="validate" placeholder="Poster is a valid http://.." ng-model="actualPost.poster"></input>
 							<label class="active" id="">Poster</label>
-						</div>						
+						</div>
 					</div>
 				</form>
 			</md-content>
-			
+
 				<div>
 
 					Related Movies:
@@ -86,13 +84,13 @@
 					</md-content>
 				</div>
 
-				<div class="input-field col s12 right-align">										
+				<div class="input-field col s12 right-align">
 					<button type="submit" form="formEdicion" class="btn btn-warning blue">Edit</button>
 					<button ng-click="eliminarPelicula(actualPost)" class="btn btn-danger  red darken-2">Delete</button>
 					<!--a class="btn btn-primary blue" ng-click="votar(actualPost)">votar</a-->
 				</div>
-						
-			
+
+
 
 		</div>
 	</div>

@@ -61,8 +61,8 @@
     <label>Search in movies: <input ng-model="searchText"></label>
     <div class="row" ng-repeat="post in posts | filter:searchText">
   		<div class="row" align="center"><font size="5"><b class="condensed light">{{post.title}}</b></font></div>
-  		<div class="col m4 s12"><img ng-src="{{post.poster}}" onerror="imgError(this);"></div>
-  		<div class="col m8 s12">
+  		<div class="col l5 m7 s12"><img ng-src="{{post.poster}}" onerror="imgError(this);"></div>
+  		<div class="col l7 m5 s12">
 			<span class="condensed light medium">
 				<div class="inattr" style="max-width: 500px;">
 							<ul>
