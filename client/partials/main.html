@@ -61,7 +61,12 @@
     <label>Search in movies: <input ng-model="searchText"></label>
     <div class="row" ng-repeat="post in posts | filter:searchText">
   		<div class="row" align="center"><font size="5"><a class="waves-effect waves-light hoverLink" href="#/posts/{{post._id}}"><b class="condensed light black-text" href="#/posts/{{post._id}}">{{post.title}}</b></a></font></div>
-  		<div class="col l5 m7 s12 center-align"><a href="#/posts/{{post._id}}"><img ng-src="{{post.poster}}" onerror="imgError(this);"></a></div>
+  		<div class="col l5 m7 s12 center-align">
+			<a href="#/posts/{{post._id}}">
+				<img ng-if="post.poster" class="maxSize" ng-src="{{post.poster}}" onerror="imgError(this);">
+				<img ng-if="!post.poster" class="maxSize" ng-src="/images/notAvailable.jpg">
+			</a>
+		</div>
   		<div class="col l7 m5 s12">
 			<span class="condensed light medium">
 				<div class="inattr">

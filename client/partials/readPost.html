@@ -4,7 +4,8 @@
 	</div>
 	<div class="row">
 			<div class="col l5 m7 s12">
-				<img ng-src="{{post.poster}}" onerror="imgError(this);">
+				<img ng-if="post.poster" class="maxSize" ng-src="{{post.poster}}" onerror="imgError(this);">
+				<img ng-if="!post.poster" class="maxSize" ng-src="/images/notAvailable.jpg">
 			</div>
 			<div class="col l7 m5 s12">
 				<div class="inattr condensed light">
