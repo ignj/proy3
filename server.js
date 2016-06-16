@@ -32,5 +32,5 @@ require('./server/config/routes.js')(app);
 // set up a static file server that points to the "client" directory
 app.use(express.static(path.join(__dirname, './client')));
 app.listen(8000, function() {
-  console.log('login and reg on: 8000');
+  console.log('connected on: localhost:8000');
 });

@@ -17,9 +17,18 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 
 	//para editar pelicula
 	$scope.editPost = function(input){
-		postFactory.editMovie(input, function(response){
-			console.log(response);
-		})
+		if(!$scope.actualPost || typeof $scope.actualPost.title == 'undefined' || $scope.actualPost.title === ""){
+			//no dejo que grabe una pelicula con titulo vacio
+			$scope.precargarCamposError = "Title cannot be empty!"
+		}
+		else{
+			postFactory.editMovie(input, function(response){
+				console.log("response editar ",response);
+				//$scope.actualPost = response; nunca lo veo
+				$location.path('/home');
+				$location.replace();
+			})
+		}
 	}
 
 	//para eliminar la pelicula

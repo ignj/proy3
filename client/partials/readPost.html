@@ -36,7 +36,7 @@
 		<div class="row valign-wrapper">
 			<div class="left-align valign"><b class="medium">{{comment.author}}</b></div>
 			<div class="right-align valign"><input-stars max="5" readonly="true" icon-base="fa fa-fw" icon-empty="fa-star-o" icon-hover="hover" icon-full="fa-star" ng-model="comment.rating"></input-stars></div>
-			<i ng-if="comment.idAuthor == user.username" class="material-icons" ng-click="deleteComment(comment)">delete</i>
+			<a ng-if="comment.idAuthor == user.username" class="btn-floating red"> <i ng-if="comment.idAuthor == user.username" class="material-icons" ng-click="deleteComment(comment)">delete</i> </a>
 		</div>
 		<div class="condensed light">
 			{{comment.body}}

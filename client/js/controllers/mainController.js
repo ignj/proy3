@@ -66,6 +66,13 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
 
   //para agregar pelicula
   $scope.addPost = function(input){
+	  //console.log("scope.newpost ",$scope.newPost);
+	  //console.log("scope.newpost.title ",$scope.newPost.title);	  
+	  if(!$scope.newPost || typeof $scope.newPost.title == 'undefined' || $scope.newPost.title === ""){
+			//no dejo que grabe una pelicula con titulo vacio
+			$scope.precargarCamposError = "Title cannot be empty!"
+	  }
+	  else{
 		postFactory.createMovie(input, function(response){
 			console.log(response);
 			//restauro los campos
@@ -77,9 +84,9 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
 			$scope.newPost.actors = "";
 			$scope.newPost.plot = "";
 			$scope.newPost.poster = "";
-
+			$scope.precargarCamposError = "";
 		});
-
+	  }
 	}
 
 	//para cargar pelicula del servicio

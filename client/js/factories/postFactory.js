@@ -5,8 +5,7 @@ myApp.factory('postFactory', function($http, $window, $location){
 
   o.createMovie = function(input, callback){
 			$http.post('/movies', input).success(function(data){
-				o.posts.push(data);
-				//la uso como promesa
+				o.posts.push(data);				
 				callback(data);
 			});
   };
@@ -32,27 +31,28 @@ myApp.factory('postFactory', function($http, $window, $location){
 		return $http.put('/movies/', input)
 			.success(function(data){
 				console.log(data);
+				callback(data);
 			});
 	};
 
-  o.setRating = function(input, callback){
+  /*o.setRating = function(input, callback){
     console.log("en la factory", input);
     return $http.put('/setrating/', input)
 			.success(function(data){
 				console.log(data);
 			});
-  }
+  }*/
 
 
 	o.deleteMovie = function(input, callback){
 		console.log('en postfactory delete', input._id);
 		var idEliminar = input._id;
-
-		//¡¡PREGUNTAR!!
+		
 		$http.delete('/movies/'+input._id)
 			.then(onSuccess,onError);
 
 		function onSuccess(data){
+			/*
 			//elimino el elemento
 				console.log("la longitud es", o.posts.length)
 				for(var i = 0; i < o.posts.length; i++) {
@@ -62,7 +62,7 @@ myApp.factory('postFactory', function($http, $window, $location){
 						delete o.posts[i];
 						console.log("borre elemento ",i," es ",o.posts[i]);
 					}
-				}
+				}*/
 
 				callback(data);
 		}
@@ -79,7 +79,7 @@ myApp.factory('postFactory', function($http, $window, $location){
 		//input es la relatedMovie, id es el id de la pelicula "que la contiene"
 		return $http.post('/movies/'+id+'/relatedMovies/', input)
 			.success(function(res){
-				var retornar;
+				/*var retornar;
 				//agrego la nueva pelicula relacionada
 				for(var i = 0; i < o.posts.length; i++) {
 
@@ -89,7 +89,9 @@ myApp.factory('postFactory', function($http, $window, $location){
 						retornar = o.posts[i];
 					}				
 				}
-				callback (retornar);
+				callback (retornar);*/
+				console.log("res es ",res);
+				callback(res);
 			});
 	}
 
@@ -98,7 +100,7 @@ myApp.factory('postFactory', function($http, $window, $location){
 		return $http.delete('/movies/'+id+'/relatedMovies/'+input._id)
 			.success(function(data){
 				//recorro las peliculas
-				var retornar;
+				/*var retornar;
 				for(var i = 0; i < o.posts.length; i++) {
 
 					if (o.posts[i]._id == id){
@@ -119,7 +121,8 @@ myApp.factory('postFactory', function($http, $window, $location){
 					}
 				}
 				//RETORNO LA PELICULA MODIFICADA
-				callback(retornar);
+				callback(retornar);*/
+				callback(data);
 
 			});
 	}
@@ -130,7 +133,7 @@ myApp.factory('postFactory', function($http, $window, $location){
 		console.log("postfactory commentData ", commentData);
 		return $http.post('/movies/'+input._id+'/comments/',commentData)
 			.success(function(data){
-				console.log("postfactory ",data);								
+			/*	console.log("postfactory ",data);								
 				//reemplazo la pelicula
 				for(var i = 0; i < o.posts.length; i++) {
 					
@@ -138,7 +141,7 @@ myApp.factory('postFactory', function($http, $window, $location){
 						//agrego el comment
 						o.posts[i] = data;
 					}				
-				}
+				}*/
 				callback (data);
 			});
 	}

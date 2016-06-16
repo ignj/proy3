@@ -57,9 +57,9 @@ module.exports = (function(){
 					movie.poster = req.body.poster;
 					movie.save(function(err){
 						if (err)
-							console.log('error')
+							return next(new Error('Could not save Document'));
 						else
-							console.log('success')
+							return res.json(movie);
 					});
 				}
 			});
