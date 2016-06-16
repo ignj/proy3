@@ -63,18 +63,21 @@ myApp.factory('userFactory', function($http, $window, $rootScope){
       })
     },
 
-    addFriend: function(friend, user, callback){
+    /*addFriend: function(friend, user, callback){
       console.log(user, 'current user in user')
       console.log('factory trying to add friend to the user', friend);
       $http.post('/addFriend', friend).then(function(response){
         // console.log(response);
       })
-    },
-    setAdminUser: function(input, callback){
-      console.log('factory trying to set admin', input);
-      $http.post('/setAdmin', input).then(function(response){
-        console.log(response);
-      })
+    },*/
+    setAdmin: function(input, user, callback){
+      //console.log('factory trying to set admin', input);
+	  console.log("en userfactory el codigo es ",input, " el user ",user);
+      $http.post('/setAdmin',input, user)
+		  .then(function(response){
+			console.log(response);
+			callback(response);
+		  })
     }
   }
 })

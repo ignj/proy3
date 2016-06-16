@@ -1,0 +1,10 @@
+<div class="valign-wrapper">
+	<div ng-if="loginChecked" class="row">
+		<h5 class="valign">Write your code</h5>
+		<input type="text" placeholder="Write code" ng-model="code.value"></input>
+		<a ng-click="setAdmin(code)" class="waves-effect waves-light btn blue">Send</a>
+	</div>
+	<div ng-if="!loginChecked" class="row">
+		<h3 class="valign">You need to be logged</h3>
+	</div>
+</div>

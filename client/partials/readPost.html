@@ -24,11 +24,11 @@
 </div>
 <div class="container">
 
-	<div class="row">
+	<div ng-show="loginChecked" class="row">
 		<font class="thin"><b>Calificar:</b></font>
 		<input-stars max="5" icon-base="fa fa-fw" icon-empty="fa-star-o" icon-hover="hover" icon-full="fa-star" ng-model="newRate.rate"></input-stars>
-		<input type="text" placeholder="Ingrese un comentario.." ng-model="newRate.comment"></input>
-		<a ng-click="rateMovie(post)" class="waves-effect waves-light btn blue">Enviar</a>
+		<input type="text" placeholder="Write a comment.." ng-model="newRate.comment"></input>
+		<a ng-click="rateMovie(post)" class="waves-effect waves-light btn blue">Send</a>
 	</div>
 
 

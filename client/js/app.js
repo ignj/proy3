@@ -38,6 +38,11 @@ function($stateProvider, $urlRouterProvider) {
 		},
 		controller: 'readPostController'
 	})
+	.state('setAdmin', {
+		url: '/setAdmin',
+		templateUrl: '/partials/setAdmin.html',
+		controller: 'setAdminController'
+	})
 
   $urlRouterProvider.otherwise('home');
 }]);

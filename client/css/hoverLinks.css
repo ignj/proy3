@@ -1,0 +1,5 @@
+a.hoverLink:hover {
+  color: blue;  
+  background-color: transparent;
+  text-decoration: underline; 
+}

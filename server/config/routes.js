@@ -16,10 +16,14 @@ module.exports = function(app) {
   app.get('/loggedin', function(req, res){
     return res.json(req.isAuthenticated() ? req.user : null);
   });
+  
+  //para volver admin a un usuario
+  app.post('/setAdmin', users.setAdmin);
 
 	//estos dos metodos sacarlos mas adelante
-  app.get('/getAllUsers', users.getAllUsers);
-  app.post('/addFriend', users.addFriend);
+  //app.get('/getAllUsers', users.getAllUsers);
+  //app.post('/addFriend', users.addFriend);
+  //ver de sacarlos tambien en el controlador users.js
 
   //definicion de parametros para las query de abajo
   app.param('movie', movies.getMovieById);
