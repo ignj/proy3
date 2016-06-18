@@ -56,9 +56,10 @@
 							<a href="#/posts/{{related._id}}">
 								{{related.title}}
 							</a>
-							<button ng-click="eliminarPeliculaRelacionada(related)" class="btn btn-danger blue">
+							<a class="btn-floating red"> <i class="material-icons" ng-click="eliminarPeliculaRelacionada(related)">delete</i> </a>
+							<!--button ng-click="eliminarPeliculaRelacionada(related)" class="btn btn-danger blue">
 								Delete
-							</button>
+							</button-->
 						</li>
 					</ul>
 

@@ -45,11 +45,12 @@
     <script src="/js/factories/userFactory.js"></script>
   	<script src="/js/factories/postFactory.js"></script>
 	<script src="/js/postRenderHandlers/cambiarImagenesError.js"></script>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+	<script src="/js/postRenderHandlers/modalTrigger.js"></script>
 	<!-- FIN LA APLICACION -->
 
   </head>
-  <body>
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+  <body>    
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.8/angular-materialize.min.js"></script>
     <!--script src="/js/estilo.js"></script-->
@@ -68,23 +69,61 @@
     </nav>
     <!--a href="#/">Login Reg</a> | <a href="#/dashboard">dashboard</a-->
     <main>
-    <ui-view></ui-view>
-  </main>
+		<ui-view></ui-view>
+	</main>
     <!--div ng-view="">
     </div-->
+		
 
-    <footer class="page-footer grey darken-4 fixed">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">Movies</h5>
-            <p class="grey-text text-lighten-4">este es el contenido del footer</p>
-          </div>
-        </div>
-      </div>
+  <!-- Modal Structure -->
+  <div id="help" class="modal">
+    <div class="modal-content">
+      <h4>Info</h4>
+      <p><b>Users:</b>
+	  </br>
+	  They can log into the system and perform actions like comment
+	  and rate movies. The option is available by clicking the title
+	  of the movie that they want to rate.
+	  </br>
+	  Also they can search for special terms displayed in the descriptions
+	  of the movies using de search bar in the top of the page.
+	  </p>
+	  <p><b>Administrators:</b>
+	  </br>
+	  They can do the same as users but also add new movies and edit
+	  the existing ones.
+	  </br>
+	  By filling the title of a movie and clicking the special button
+	  <a class="btn-floating blue"> <i class="material-icons">cloud_download</i> </a>
+	  they are available to use a web service from <a href="http://www.omdbapi.com/">OMDbAPI</a>
+	  in order to fill all the fields for the movie specified by title.	  
+	  </br>
+	  If a User want to become Administrator it has to go to the <a href="/#/setAdmin" target="_blank">special page</a>
+	  and send the special code "2YMZkWs3NDQSBVwyDKdv".
+	  </p>
+	  </br>	  
+	  <p><b>Credits:</b>
+	  </br>
+		<a href="https://github.com/melloc01/angular-input-stars">Angular input stars</a>
+	  </p>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
+    </div>
+  </div>
+
+    <footer class="page-footer grey darken-4 fixed">      
       <div class="footer-copyright grey darken-4">
-      </div>
+		<div class="container">
+            Authors: Borek - Jócano
+            
+			<!-- Modal Trigger -->
+			<a class="grey-text text-lighten-4 right modal-trigger" href="#help">Info</a>
+        </div>
+      </div>	  
     </footer>
+	
+	
   </body>
 
 
