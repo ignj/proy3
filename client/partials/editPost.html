@@ -1,17 +1,17 @@
 <div class="container">
 	<div ng-show="isAdmin" class="row">
 		<div class="col s12 m4 l2"><p></p></div>
-		<div class="row col s12 m4 l8">
+		<div class="container">
 			<h3 class="thin center-align"> Edition </h3>
 			<md-content class="md-padding">
 				<form ng-submit="editPost(actualPost)" id="formEdicion" class="col s12">
 					<div class="row">
 						<div class="row valign-wrapper">
-							<div class="input-field col s11 valign">
+							<div class="input-field col s10 valign">
 								<input type="text" id="title" class="validate" placeholder="Title" ng-model="actualPost.title"></input>
 								<label class="active" id="precargarCamposError" for="title">Title | {{precargarCamposError}}</label>
 							</div>
-							<div class="col s1 valign">
+							<div class="col s2 valign">
 								<a class="btn-floating blue"> <i class="material-icons" ng-click="precargarCampos(actualPost.title)">cloud_download</i> </a>
 								<!--i class="material-icons" ng-click="precargarCampos(actualPost.title)">cloud_download</i-->
 							</div>

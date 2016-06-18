@@ -45,19 +45,15 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
     $scope.userData = {};
   }
 
-  $scope.logoutUser = function(input){
+  $scope.logoutUser = function(){
     //call factory
-    userFactory.logoutUser(input, function(response){
-      console.log(response);
-      if(response.err){
-        console.log('there was an error!');
-        $scope.error.message = response.err;
-      } else {
-        console.log('no error, log them in');
-        $location.url('/');
-      }
-    })
-    $scope.userData = {};
+    console.log("Entro al controlador");
+    userFactory.logoutUser(function(response){
+      console.log("----------");
+      //$location.url('/home');
+      window.location.reload(); 
+      //$location.reload();
+    });
   }
 
   //obtengo las peliculas
@@ -67,7 +63,7 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
   //para agregar pelicula
   $scope.addPost = function(input){
 	  //console.log("scope.newpost ",$scope.newPost);
-	  //console.log("scope.newpost.title ",$scope.newPost.title);	  
+	  //console.log("scope.newpost.title ",$scope.newPost.title);
 	  if(!$scope.newPost || typeof $scope.newPost.title == 'undefined' || $scope.newPost.title === ""){
 			//no dejo que grabe una pelicula con titulo vacio
 			$scope.precargarCamposError = "Title cannot be empty!"

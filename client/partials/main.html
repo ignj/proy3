@@ -10,11 +10,11 @@
 					<form ng-submit="addPost(newPost)" class="col s12">
 				  <div class="row">
 						<div class="row valign-wrapper">
-							<div class="input-field col s11 valign">
+							<div class="input-field col s10 valign">
 								<input type="text" id="title" class="validate" ng-model="newPost.title"></input>
 								<label class="active" id="precargarCamposError" for="title">Title | {{precargarCamposError}}</label>
 							</div>
-							<div class="col s1 valign">
+							<div class="col s2 valign">
 								<a class="btn-floating blue"> <i class="material-icons" ng-click="precargarCampos(newPost.title)">cloud_download</i> </a>
 							</div>
 						</div>
@@ -63,8 +63,8 @@
   		<div class="row" align="center"><font size="5"><a class="waves-effect waves-light hoverLink" href="#/posts/{{post._id}}"><b class="condensed light black-text" href="#/posts/{{post._id}}">{{post.title}}</b></a></font></div>
   		<div class="col l5 m7 s12 center-align">
 			<a href="#/posts/{{post._id}}">
-				<img ng-if="post.poster" class="maxSize" ng-src="{{post.poster}}" onerror="imgError(this);">
-				<img ng-if="!post.poster" class="maxSize" ng-src="/images/notAvailable.jpg">
+				<img ng-if="post.poster" class="maxSize hoverable" ng-src="{{post.poster}}" onerror="imgError(this);">
+				<img ng-if="!post.poster" class="maxSize hoverable" ng-src="/images/notAvailable.jpg">
 			</a>
 		</div>
   		<div class="col l7 m5 s12">
@@ -86,5 +86,5 @@
 				</div>
 			</span>
 		</div>
-    </div>
+  </div>
 </div>

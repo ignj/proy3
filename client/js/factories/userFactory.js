@@ -28,19 +28,21 @@ myApp.factory('userFactory', function($http, $window, $rootScope){
     getUser: function(callback){
       callback(user);
     },
-    logoutUser: function(){
+    logoutUser: function(callback){
       user = {};
+      console.log("Entro el factory");
       $http.post('/logout').then(function(response){
-        console.log(response);
+        console.log("<<<<--------->>>>");
+        callback(response);
       })
     },
     checkLogin: function(callback){
       $http.get('/loggedin').then(function(response){
         if(response.data){
           user = response.data;
-          callback(response);
+          callback(user);
         } else {
-          callback(response);
+          callback(user);
         }
       })
     },

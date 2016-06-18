@@ -16,7 +16,14 @@ module.exports = function(app) {
   app.get('/loggedin', function(req, res){
     return res.json(req.isAuthenticated() ? req.user : null);
   });
-  
+
+  app.post('/logout', function(req,res){
+    console.log('logging out ', req.session.passport.user);
+    req.logOut();
+    console.log('are they still logged in?', req.isAuthenticated());
+    res.send(200);
+  })
+
   //para volver admin a un usuario
   app.post('/setAdmin', users.setAdmin);
 
@@ -33,7 +40,7 @@ module.exports = function(app) {
   app.post('/movies', movies.createMovie);
   app.get('/movies', movies.getAllMovies);
   app.get('/movies/:movie', movies.getLinkedObjectsOfMovie);
-  app.put('/movies', movies.editMovie);    
+  app.put('/movies', movies.editMovie);
   app.delete('/movies/:movie', movies.deleteMovie);
 
   //rutas de manejo de peliculas relacionadas
