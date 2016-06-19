@@ -1,13 +1,13 @@
 myApp.controller('mainController', function($scope, $rootScope, $location, $http, userFactory, postFactory){
   $scope.registeredUser = {};
   $scope.error = {};
-  $scope.loginChecked = false;
+  $scope.loginChecked = true;
   $scope.user = false;
   $scope.isAdmin = false;
 
   userFactory.getUserLogin(function(user){
     $scope.user = user;
-    $scope.loginChecked = true;
+    $scope.loginChecked = false;
     if ($scope.user.type == "admin")
       $scope.isAdmin = true;
   });
@@ -51,8 +51,9 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
     userFactory.logoutUser(function(response){
       console.log("----------");
       //$location.url('/home');
-      window.location.reload(); 
+      window.location.reload();
       //$location.reload();
+      $scope.loginChecked = true;
     });
   }
 
@@ -130,5 +131,10 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
   $('.collapsible').collapsible({
     accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
   });
+
+  // Initialize collapse button
+ $(".button-collapse").sideNav();
+ // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+ //$('.collapsible').collapsible();
 
 });

@@ -50,7 +50,7 @@
 	<!-- FIN LA APLICACION -->
 
   </head>
-  <body>    
+  <body>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.8/angular-materialize.min.js"></script>
     <!--script src="/js/estilo.js"></script-->
@@ -61,10 +61,16 @@
         <a href="/" class="brand-logo">Movies</a>
 
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-          <li ng-show="!loginChecked && !user"><a href="/auth/google"><i class="material-icons right">perm_identity</i>Sign In with Google</a></li>
-          <li ng-show="loginChecked && user"><a ng-click="logoutUser()"><i class="material-icons right">directions_walk</i>Sign Out</a></li>
-          <li ng-show="loginChecked && user"><i class="material-icons right">perm_identity</i>{{user.name}}</li>
+          <li ng-show="loginChecked && !user"><a href="/auth/google"><i class="material-icons right">perm_identity</i>Sign In with Google</a></li>
+          <li ng-show="!loginChecked && user"><a ng-click="logoutUser()"><i class="material-icons right">directions_walk</i>Sign Out</a></li>
+          <li ng-show="!loginChecked && user"><i class="material-icons right">perm_identity</i>{{user.name}}</li>
         </ul>
+        <ul id="slide-out" class="side-nav">
+          <li ng-show="loginChecked && !user"><a href="/auth/google"><i class="material-icons right">perm_identity</i>Sign In with Google</a></li>
+          <li ng-show="!loginChecked && user"><a ng-click="logoutUser()"><i class="material-icons right">directions_walk</i>Sign Out</a></li>
+          <li ng-show="!loginChecked && user"><i class="material-icons right">perm_identity</i>{{user.name}}</li>
+        </ul>
+        <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-navigation-menu material-icons">menu</i></a>
       </div>
     </nav>
     <!--a href="#/">Login Reg</a> | <a href="#/dashboard">dashboard</a-->
@@ -73,7 +79,7 @@
 	</main>
     <!--div ng-view="">
     </div-->
-		
+
 
   <!-- Modal Structure -->
   <div id="help" class="modal">
@@ -96,12 +102,12 @@
 	  By filling the title of a movie and clicking the special button
 	  <a class="btn-floating blue"> <i class="material-icons">cloud_download</i> </a>
 	  they are available to use a web service from <a href="http://www.omdbapi.com/">OMDbAPI</a>
-	  in order to fill all the fields for the movie specified by title.	  
+	  in order to fill all the fields for the movie specified by title.
 	  </br>
 	  If a User want to become Administrator it has to go to the <a href="/#/setAdmin" target="_blank">special page</a>
 	  and send the special code "2YMZkWs3NDQSBVwyDKdv".
 	  </p>
-	  </br>	  
+	  </br>
 	  <p><b>Credits:</b>
 	  </br>
 		<a href="https://github.com/melloc01/angular-input-stars">Angular input stars</a>
@@ -112,18 +118,18 @@
     </div>
   </div>
 
-    <footer class="page-footer grey darken-4 fixed">      
+    <footer class="page-footer grey darken-4 fixed">
       <div class="footer-copyright grey darken-4">
 		<div class="container">
             Authors: Borek - Jócano
-            
+
 			<!-- Modal Trigger -->
 			<a class="grey-text text-lighten-4 right modal-trigger" href="#help">Info</a>
         </div>
-      </div>	  
+      </div>
     </footer>
-	
-	
+
+
   </body>
 
 
