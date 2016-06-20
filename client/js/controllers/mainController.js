@@ -14,7 +14,7 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
 
 
   userFactory.checkLogin(function(response){
-    console.log(response);
+
     if(response.data){
       $location.url('/dashboard');
     }
@@ -23,22 +23,22 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
   $scope.createUser = function(input){
     //call factory
     userFactory.createUser(input, function(response){
-      console.log(response);
+
     })
     $scope.newUser = {};
 
   }
 
   $scope.loginUser = function(input){
-    console.log('trying to login user with', input);
+
     //call factory
     userFactory.loginUser(input, function(response){
-      console.log(response);
+
       if(response.err){
-        console.log('there was an error!');
+
         $scope.error.message = response.err;
       } else {
-        console.log('no error, log them in');
+
         $location.url('/dashboard');
       }
     })
@@ -47,19 +47,16 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
 
   $scope.logoutUser = function(){
     //call factory
-    console.log("Entro al controlador");
-    userFactory.logoutUser(function(response){
-      console.log("----------");
-      //$location.url('/home');
-      window.location.reload();
-      //$location.reload();
+    
+    userFactory.logoutUser(function(response){      
+      window.location.reload();      
       $scope.loginChecked = true;
     });
   }
 
   //obtengo las peliculas
   $scope.posts = postFactory.posts;
-  $scope.precargarCamposError = ""; //ningun error, replicar codigo en addpost?
+  $scope.precargarCamposError = ""; //ningun error
 
   //**ordenamiento de peliculas**
   $scope.propertyName = '_id';
@@ -72,16 +69,14 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
   //** fin ordenamiento peliculas**
   
   //para agregar pelicula
-  $scope.addPost = function(input){
-	  //console.log("scope.newpost ",$scope.newPost);
-	  //console.log("scope.newpost.title ",$scope.newPost.title);
+  $scope.addPost = function(input){	  
 	  if(!$scope.newPost || typeof $scope.newPost.title == 'undefined' || $scope.newPost.title === ""){
 			//no dejo que grabe una pelicula con titulo vacio
 			$scope.precargarCamposError = "Title cannot be empty!"
 	  }
 	  else{
 		postFactory.createMovie(input, function(response){
-			console.log(response);
+	
 			//restauro los campos
 			$scope.newPost.title = "";
 			$scope.newPost.year = "";
@@ -145,6 +140,6 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
   // Initialize collapse button
  $(".button-collapse").sideNav();
  // Initialize collapsible (uncomment the line below if you use the dropdown variation)
- //$('.collapsible').collapsible();
+ 
 
 });

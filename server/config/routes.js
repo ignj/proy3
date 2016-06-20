@@ -18,19 +18,14 @@ module.exports = function(app) {
   });
 
   app.post('/logout', function(req,res){
-    console.log('logging out ', req.session.passport.user);
+
     req.logOut();
-    console.log('are they still logged in?', req.isAuthenticated());
+
     res.send(200);
   })
 
   //para volver admin a un usuario
   app.post('/setAdmin', users.setAdmin);
-
-	//estos dos metodos sacarlos mas adelante
-  //app.get('/getAllUsers', users.getAllUsers);
-  //app.post('/addFriend', users.addFriend);
-  //ver de sacarlos tambien en el controlador users.js
 
   //definicion de parametros para las query de abajo
   app.param('movie', movies.getMovieById);

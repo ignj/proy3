@@ -4,8 +4,7 @@ var CommentSchema = new mongoose.Schema({
   body: String,
   author: String,
   idAuthor: String,
-  rating: Number,
-  //movie: { type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }
+  rating: Number
 });
 
 mongoose.model('Comment', CommentSchema);

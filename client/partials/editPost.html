@@ -13,7 +13,6 @@
 							</div>
 							<div class="col s2 valign">
 								<a class="btn-floating blue"> <i class="material-icons" ng-click="precargarCampos(actualPost.title)">cloud_download</i> </a>
-								<!--i class="material-icons" ng-click="precargarCampos(actualPost.title)">cloud_download</i-->
 							</div>
 						</div>
 						<div class="input-field col s6">
@@ -56,10 +55,7 @@
 							<a href="#/posts/{{related._id}}">
 								{{related.title}}
 							</a>
-							<a class="btn-floating red"> <i class="material-icons" ng-click="eliminarPeliculaRelacionada(related)">delete</i> </a>
-							<!--button ng-click="eliminarPeliculaRelacionada(related)" class="btn btn-danger blue">
-								Delete
-							</button-->
+							<a class="btn-floating red"> <i class="material-icons" ng-click="eliminarPeliculaRelacionada(related)">delete</i> </a>							
 						</li>
 					</ul>
 
@@ -88,8 +84,7 @@
 
 				<div class="input-field col s12 right-align">
 					<button type="submit" form="formEdicion" class="btn btn-warning blue">Edit</button>
-					<button ng-click="eliminarPelicula(actualPost)" class="btn btn-danger  red darken-2">Delete</button>
-					<!--a class="btn btn-primary blue" ng-click="votar(actualPost)">votar</a-->
+					<button ng-click="eliminarPelicula(actualPost)" class="btn btn-danger  red darken-2">Delete</button>					
 				</div>
 
 

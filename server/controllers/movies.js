@@ -11,7 +11,6 @@ module.exports = (function(){
  				var error = new Error('no eres admin ');
  				return next(error);
  			}
-			console.log('en controlador movies');
 			var movie = new Movie({
 				title: req.body.title,
 				year: req.body.year,
@@ -22,9 +21,7 @@ module.exports = (function(){
 				plot: req.body.plot,
 				poster: req.body.poster,
 				relatedMovies: [],
-				comments: [],
-				rating: 0,
-				votes: 0
+				comments: [],				
 			});
 			movie.save(function(err, movie){
 				if(err){
@@ -39,14 +36,11 @@ module.exports = (function(){
 			if (req.user == null) {
  				var error = new Error('no eres admin ');
  				return next(error);
- 			}
-			console.log("en editar ",req.body);
+ 			}			
 			Movie.findById(req.body._id, function(err, movie){
 				if(!movie)
 					return next(new Error('Could not load Document'));
-				else{
-					// se modifica la pelicula
-					//console.log("movie.year ",movie.year," req.body.year ",req.body.year);
+				else{			
 					movie.title = req.body.title;
 					movie.year = req.body.year;
 					movie.runtime = req.body.runtime;
@@ -63,33 +57,7 @@ module.exports = (function(){
 					});
 				}
 			});
-		},
-	/*
-		setRating: function(req, res){
-			if (req.user != null) {
-				var error = new Error('no eres admin ');
-				return error;
-			}
-			Movie.findById(req.body._id, function(err, movie){
-				if(!movie)
-					return next(new Error('Could not load Document'));
-				else{
-					// se modifica la pelicula
-					movie.rating = (req.body.rating + movie.rating) / (movie.votes + 1);
-					movie.votes = movie.votes + 1;
-
-					movie.save(function(err){
-						if (err) {
-							console.log("en error");
-            	res.status(500).json({ error: "save failed", err: err});
-		        } else {
-								console.log('success')
-		            res.status(201).json(movie);
-		        }
-					});
-				}
-			});
-		},*/
+		},	
 		deleteMovie: function(req, res, next){
 			if (req.user.type != "admin") {
 				var error = new Error('no eres admin ');
@@ -141,9 +109,7 @@ module.exports = (function(){
 			if (req.user.type != "admin") {
  				var error = new Error('no eres admin ');
  				return next(error);
- 			}
-			console.log("pelicula a modificar", req.movie);
-			console.log("cuerpo mensaje ",req.body);
+ 			}			
 
 			Movie.findById(req.movie._id)
 				 .populate('relatedMovies')
@@ -170,11 +136,7 @@ module.exports = (function(){
 			if (req.user.type != "admin") {
  				var error = new Error('no eres admin ');
  				return next(error);
- 			}
-			//console.log("movie ",req.params.movie," req.params.relatedMovie ", req.params.relatedMovie);
-			//recupero aca los parametros porque en routes.js solo
-			//recupera un solo document y es bastante confuso
-			//dejar media consulta aca y media consulta en routes.js
+ 			}			
 
 			var idPeliculaModificar = req.params.movie;
 			var relatedMovieId = req.params.relatedMovie;
@@ -206,18 +168,12 @@ module.exports = (function(){
 				 });
 
 		},
-		addComment: function(req,res,next){
-			console.log("en addComent servidor. la pelicula es ",req.movie);
-			console.log("insertar ",req.body.comment," ",req.body.authorName," ",req.body.idAuthor," ",req.body.rate);
-			//var respuesta;
-			//comments.createComment(req,respuesta);
-			//agrego el comment
-			//parent.children.push({ name: 'Liesl' });
+		addComment: function(req,res,next){			
 			
 			Movie.findById(req.movie._id)
 				 .populate('comments')
 				 .exec(function(err,movie){
-					 console.log("comments es ",movie.comments);
+					 
 					 if (err) {return next(err);}
 					 var existe = false;
 					 var aSacar;
@@ -230,27 +186,26 @@ module.exports = (function(){
 					 });
 
 					 if (!existe){
-						 //creo el nuevo comentario y lo agrego
-						console.log("en el if");
+						 //creo el nuevo comentario y lo agrego						
 						var nuevo = new Comment({body: req.body.comment, author: req.body.authorName, idAuthor: req.body.idAuthor, rating: req.body.rate});
 						nuevo.save(function (err) {
 						if (err) {                                
 							console.log("error al crear", err);
 						} else {
-								console.log("se grabo nuevo");
+							
 								movie.comments.push(nuevo);
 						 
 								movie.save(function(err, movie) {
 									if(err){ 
 										return next(err); 
-										console.log("error al guardar");
+							
 									}
-									console.log("return ",movie);
+							
 									res.json(movie);
 								});
 						}
 						});
-						console.log("comentario nuevo ",nuevo);
+
 						 
 					}
 					 else{
@@ -261,16 +216,16 @@ module.exports = (function(){
 						if (err) {                                
 							console.log("error al reemplazar");
 						} else {
-								console.log("se grabo nuevo");
+
 								movie.comments.pull(aSacar);
 								movie.comments.push(nuevo);
 						 
 								movie.save(function(err, movie) {
 									if(err){ 
-										console.log("error al guardar reemplazo", err);
+
 										return next(err); 
 									}
-									console.log("return ",movie);
+
 									res.json(movie);
 								});
 						}
@@ -281,26 +236,19 @@ module.exports = (function(){
 			
 			
 			
-			//req.movie.comments.push({body: req.body.comment, author: req.body.authorName, idAuthor: req.body.idAuthor, rating: req.body.rate});
-			
-			//req.movie.save(function (err) {
-			 // if (err) return handleError(err)
-			  //console.log('Success!');
-			//});
-
 		},
 		deleteComment: function(req,res,next){			
-			console.log("req ",req.params);
+			
 			Movie.findById(req.movie._id)
 				 .populate('comments')
 				 .exec(function(err,movie){
-					 console.log("comments es ",movie.comments);
+			
 					 if (err) {return next(err);}
 					 var existe = false;
 					 var aSacar;
 					 movie.comments.forEach(function(comment){						 
 						if (comment.idAuthor == req.params.comment){
-							console.log("comment id ",comment.idAuthor," req.body ",req.params.comment);
+			
 							//el autor ya califico
 							existe=true;
 							aSacar = comment;
@@ -309,7 +257,7 @@ module.exports = (function(){
 
 					if (!existe){
 						//si no existe error
-						console.log("error al eliminar comentario");
+			
 						return next(new Error('Could not delete comment'));
 						 
 					}
@@ -319,10 +267,10 @@ module.exports = (function(){
 						movie.comments.pull(aSacar);		
 						movie.save(function(err, movie) {
 							if(err){ 
-								console.log("error al guardar reemplazo", err);
+			
 								return next(err); 
 							}
-							console.log("return ",movie);
+			
 							res.json(movie);
 						});
 					}

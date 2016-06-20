@@ -23,8 +23,6 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 		}
 		else{
 			postFactory.editMovie(input, function(response){
-				console.log("response editar ",response);
-				//$scope.actualPost = response; nunca lo veo
 				$location.path('/home');
 				$location.replace();
 			})
@@ -42,7 +40,7 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 
 	$scope.votar = function(input){
 		postFactory.setRating(input, function(response){
-			console.log(response);
+			
 		})
 	}
 
@@ -108,12 +106,12 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
     return results;
 	}
 	function searchTextChange(text) {
-		$log.info('Text changed to ' + text);
+		//$log.info('Text changed to ' + text);
 	}
 
 	//se añade la pelicula relacionada
 	function selectedItemChange(item) {
-		$log.info('Item changed to ' + JSON.stringify(item));
+		//$log.info('Item changed to ' + JSON.stringify(item));
 		input = JSON.stringify(item);
 		if (item != null){
 			id = actualPost._id;
@@ -134,16 +132,3 @@ function(actualPost, postFactory, $scope, $http, $location, $log, $window, userF
 	}
 
 });
-
-/* formato de pelicula en base de datos
-  title: String,
-  year: String,
-  runtime: String,
-  genre: String,
-  director: String,
-  actors: String,
-  plot: String,
-  poster: String,
-  //keywords: [String],
-  relatedMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movies' }],
-  comments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Comment' }]*/

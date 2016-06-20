@@ -18,9 +18,7 @@ module.exports = (function(){
       })
     },
 	setAdmin: function(req, res, next){
-		console.log("req.user ",req.user);
-		console.log("req.input ",req.input);
-		console.log("req.body el value es ",req.body.value);
+
 		if (req.body.value === codeAdmin){
 			User.findById(req.user._id, function(err,usr){
 				if(!usr)
@@ -48,13 +46,5 @@ module.exports = (function(){
       })
     }
 
-    /*addFriend: function(req, res){
-      User.findOne({_id: req.user.id}, function(err, user){
-        user.friend.push(req.body);
-        user.save(function(err){
-          res.json(err);
-        })
-      })
-    }*/
   }
 })();

@@ -16,8 +16,6 @@ var UserSchema = mongoose.Schema({
 
 // checking if password is valid
 UserSchema.methods.validPassword = function(password) {
-	console.log(password, 'in model user');
-	console.log(this.password, 'password in database');
 
     return bcrypt.compareSync(password, this.password);
 };
