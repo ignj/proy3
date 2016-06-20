@@ -61,6 +61,16 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
   $scope.posts = postFactory.posts;
   $scope.precargarCamposError = ""; //ningun error, replicar codigo en addpost?
 
+  //**ordenamiento de peliculas**
+  $scope.propertyName = 'age';
+  $scope.reverse = true;
+
+  $scope.sortBy = function(propertyName) {
+    $scope.reverse = ($scope.propertyName === propertyName) ? !$scope.reverse : false;
+    $scope.propertyName = propertyName;
+  };
+  //** fin ordenamiento peliculas**
+  
   //para agregar pelicula
   $scope.addPost = function(input){
 	  //console.log("scope.newpost ",$scope.newPost);

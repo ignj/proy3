@@ -58,8 +58,25 @@
     </li>
 
   </ul>
-    <label>Search in movies: <input ng-model="searchText"></label>
-    <div class="row" ng-repeat="post in posts | filter:searchText | orderBy:_id:true">
+  
+	
+    <div class="row valign-wrapper">
+		<div class="col s6 valign">
+			<label>Search in movies: <input ng-model="searchText"></label>
+		</div>
+		<div class="col s6 valign">
+			<label>Sort by:</label>
+			<button class="btn waves-effect waves-light blue" ng-click="sortBy('_id')">Upload date</button>		
+			<button class="btn waves-effect waves-light blue" ng-click="sortBy('year')">Year</button>
+			<a ng-show="propertyName === '_id' || propertyName === 'year'" class="btn-floating disabled"> 				
+				<i class="material-icons" ng-show="(propertyName === '_id' || propertyName === 'year') && reverse">keyboard_arrow_up</i>				
+				<i class="material-icons" ng-show="(propertyName === '_id' || propertyName === 'year') && !reverse">keyboard_arrow_down</i>				
+			</a>
+		</div>
+    </div>
+     
+		
+    <div class="row" ng-repeat="post in posts | filter:searchText | orderBy:propertyName:reverse">
   		<div class="row" align="center"><font size="5"><a class="waves-effect waves-light hoverLink" href="#/posts/{{post._id}}"><b class="condensed light black-text" href="#/posts/{{post._id}}">{{post.title}}</b></a></font></div>
   		<div class="col l5 m7 s12 center-align">
 			<a href="#/posts/{{post._id}}">
@@ -81,7 +98,7 @@
 								<li ng-repeat="related in post.relatedMovies | orderBy: 'title'"><a href="#/posts/{{related._id}}">{{related.title}}</a></li>
 							</ul>
 					<div>
-					  <a ng-show="isAdmin" class="waves-effect waves-light btn blue" href="#/posts/e/{{post._id}}">editar</a>
+					  <a ng-show="isAdmin" class="waves-effect waves-light btn blue" href="#/posts/e/{{post._id}}">Edit</a>
 					</div>
 				</div>
 			</span>
