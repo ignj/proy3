@@ -62,7 +62,7 @@ myApp.controller('mainController', function($scope, $rootScope, $location, $http
   $scope.precargarCamposError = ""; //ningun error, replicar codigo en addpost?
 
   //**ordenamiento de peliculas**
-  $scope.propertyName = 'age';
+  $scope.propertyName = '_id';
   $scope.reverse = true;
 
   $scope.sortBy = function(propertyName) {
